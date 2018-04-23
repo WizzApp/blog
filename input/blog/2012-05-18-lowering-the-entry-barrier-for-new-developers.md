@@ -4,7 +4,7 @@ title: "Lowering the entry barrier for new developers on an existing project"
 date: 2012-05-23 09:18
 comments: true
 categories: [software development]
-tags: software development, practices, tools, nuget, roundhouse, continuous integration, continuous delivery, project management
+tags: [software development, practices, tools, nuget, roundhouse, continuous integration, continuous delivery, project management]
 ---
 
 ### What is this all about?
