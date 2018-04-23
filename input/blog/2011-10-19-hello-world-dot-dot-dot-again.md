@@ -4,7 +4,7 @@ title: "Hello World ... again"
 date: 2011-10-19 11:58
 comments: true
 categories: blogging 
-keywords: blogging
+tags: blogging
 ---
 
 Hello world ... again. This time in english ;-). 

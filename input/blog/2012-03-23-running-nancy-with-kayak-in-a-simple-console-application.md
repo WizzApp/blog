@@ -4,7 +4,7 @@ title: "Running Nancy with Kayak in a simple console application"
 date: 2012-03-23 18:09
 comments: true
 categories: [Nancy, Kayak, software development, C#, .NET]
-keywords: Nancy, Kayak, software development, C#, .NET, console application, self host, OWIN
+tags: Nancy, Kayak, software development, C#, .NET, console application, self host, OWIN
 published: yes
 ---
 

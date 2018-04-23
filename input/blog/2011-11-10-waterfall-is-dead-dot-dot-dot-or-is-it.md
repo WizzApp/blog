@@ -4,8 +4,7 @@ title: "Waterfall is dead ... or is it?"
 date: 2011-11-10 14:32
 comments: true
 categories: [project management, software development]
-published: true
-keywords: project management, software development, waterfall, agile
+tags: project management, software development, waterfall, agile
 ---
 
 {% img right http://www.daniel-rosendorf.de/images/waterfall_medium.jpg %}

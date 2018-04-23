@@ -3,7 +3,7 @@ layout: post
 title: "Kiss or how I wasted two work days"
 date: 2015-01-09 16:42:27 +0100
 comments: true
-categories: [software development]
+tags: [software development]
 ---
 
 {% blockquote Wikipedia http://en.wikipedia.org/wiki/KISS_principle KISS principle %}
@@ -23,11 +23,3 @@ Simple: Focus on the real problem. Ignore anything else that might come up. KISS
 ### But the funny thing is ...
 
 ... I'm not actually a fan of generic solutions. Most of the time I actively oppose solving problems that do not yet exist when one of my coworkers asks me for advice. Yet I still fall into this trap. Why is that? I don't know (that topic is for another post), but mark my words: From this day on I shall focus on the problem at hand and only on the problem at hand ;-)
-
-
-
-
-
-
-
-

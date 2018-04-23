@@ -4,10 +4,10 @@ title: "Brainstorming: Living documentation"
 date: 2013-08-15 15:33
 comments: true
 categories: [brainstorming, software development]
-keywords: brainstorming, software development, living documentation, software architecture, practices, specifcation by example
+tags: brainstorming, software development, living documentation, software architecture, practices, specifcation by example
 ---
 
-*So it's been awhile since my last [brainstorming](/blog/categories/brainstorming/) article (almost 2 years), but here is another one ;-)*
+_So it's been awhile since my last [brainstorming](/blog/categories/brainstorming/) article (almost 2 years), but here is another one ;-)_
 
 {% img right http://www.daniel-rosendorf.de/images/library.jpg %}
 
@@ -17,7 +17,7 @@ So, I'm reading again ... after what seems like years I decided to read somethin
 
 ### The premise
 
-Imagine a typical software project with detailed specifications and a lot of automated acceptance tests (both of which do exist in every project, right? ;-). In "Specification By Example" Gojko talks about *living documentation*, which means that specifications are *executable* and are *validated frequently* against the project.
+Imagine a typical software project with detailed specifications and a lot of automated acceptance tests (both of which do exist in every project, right? ;-). In "Specification By Example" Gojko talks about _living documentation_, which means that specifications are _executable_ and are _validated frequently_ against the project.
 
 Basically the specifications and the examples included are acceptance tests that get executed during the build and reflect the current development progress.
 
@@ -29,7 +29,7 @@ Unless you are using something like the [Gherkin]() language to do your specific
 
 You already have automatic tests in place and you already have the build fail if a test fails which in turn means you already have a test report. Everything that's missing is a system to capture the specifications and some way to map the captured specifications to one or more automatic tests.
 
-So that's what we are going to build. 
+So that's what we are going to build.
 
 ### The web application
 
@@ -46,7 +46,7 @@ For this to work the projects test results need to be uploaded to the web applic
 
 ### The workflow
 
-Let's assume we have a specification that we need to implement. We already have it in the system, so when a customer logs into the web interface the specification is shown as "Not implemented". Now the developer has implemented some or all examples/test cases and the current test results got automatically uploaded to the application. So the developer logs in, selects the not yet implemented specification and is then able to map test results to this specification, so that after the mapping is done and the developer checks a checkbox during mapping that says "These are all test cases, there will not be any more" the specification and/or its examples will be shown as "Ok". The mapping is stored so that when a mapped test fails, the project overview will be updated and show the status as "Failing". 
+Let's assume we have a specification that we need to implement. We already have it in the system, so when a customer logs into the web interface the specification is shown as "Not implemented". Now the developer has implemented some or all examples/test cases and the current test results got automatically uploaded to the application. So the developer logs in, selects the not yet implemented specification and is then able to map test results to this specification, so that after the mapping is done and the developer checks a checkbox during mapping that says "These are all test cases, there will not be any more" the specification and/or its examples will be shown as "Ok". The mapping is stored so that when a mapped test fails, the project overview will be updated and show the status as "Failing".
 
 From here on, advanced workflows can be started, e.g. if a specification fails is it because requirements have changed or because of technical dependencies in the system (which probably should not be there).
 
@@ -55,5 +55,5 @@ From here on, advanced workflows can be started, e.g. if a specification fails i
 I honestly don't know ... but I will make this some kind of conceptual series and blog about design details. So maybe at the end, we have a complete specification that we can implement ;-)
 
 ---
-Image courtesy of [Yuri Levchenko](http://www.flickr.com/people/i8ipod/).
 
+Image courtesy of [Yuri Levchenko](http://www.flickr.com/people/i8ipod/).

@@ -4,7 +4,7 @@ title: "Blogging is hard"
 date: 2012-06-01 14:35
 comments: true
 categories: blogging
-keywords: blogging
+tags: blogging
 ---
 
 As the title says: Blogging is hard. At least for me. I'm used to consume stuff on the internet, getting myself to write about stuff that actually interests someone is not easy.

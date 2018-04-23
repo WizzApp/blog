@@ -3,7 +3,7 @@ layout: post
 title: "I need someone to watch my back"
 date: 2015-01-29 13:00:01 +0100
 comments: true
-categories: [software development]
+tags: [software development]
 ---
 
 ### TL;DR;
