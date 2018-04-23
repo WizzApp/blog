@@ -4,6 +4,7 @@
 // Customize your settings and add new ones here
 Settings[Keys.Host] = "daniel-rosendorf.de";
 Settings[BlogKeys.Title] = "Daniel's Blog";
-Settings[BlogKeys.Description] = "Welcome!";
+Settings[BlogKeys.Description] = "Welcome to Daniel's blog!";
+Settings[BlogKeys.PostsPath] = "blog";
 
 // Add any pipeline customizations here
