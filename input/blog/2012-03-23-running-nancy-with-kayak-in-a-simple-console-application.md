@@ -5,7 +5,7 @@ date: 2012-03-23 18:09
 comments: true
 categories: [Nancy, Kayak, software development, CSharp, .NET]
 tags: [Nancy, Kayak, software development, CSharp, .NET, console application, self host, OWIN]
-published: yes
+RedirectFrom: blog/2012/03/23/running-nancy-with-kayak-in-a-simple-console-application/index.html
 ---
 
 Here we go again ...

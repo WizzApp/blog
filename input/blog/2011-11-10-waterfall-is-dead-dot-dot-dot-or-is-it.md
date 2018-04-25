@@ -5,6 +5,7 @@ date: 2011-11-10 14:32
 comments: true
 categories: [project management, software development]
 tags: [project management, software development, waterfall, agile]
+RedirectFrom: blog/2011/11/10/waterfall-is-dead-dot-dot-dot-or-is-it/index.html
 ---
 
 {% img right http://www.daniel-rosendorf.de/images/waterfall_medium.jpg %}

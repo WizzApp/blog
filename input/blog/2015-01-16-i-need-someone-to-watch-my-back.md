@@ -4,6 +4,7 @@ title: "I need someone to watch my back"
 date: 2015-01-29 13:00:01 +0100
 comments: true
 tags: [software development]
+RedirectFrom: blog/2015/01/16/i-need-someone-to-watch-my-back/index.html
 ---
 
 ### TL;DR;

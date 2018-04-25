@@ -5,6 +5,7 @@ date: 2012-05-23 09:18
 comments: true
 categories: [software development]
 tags: [software development, practices, tools, nuget, roundhouse, continuous integration, continuous delivery, project management]
+RedirectFrom: blog/2012/05/18/lowering-the-entry-barrier-for-new-developers/index.html
 ---
 
 ### What is this all about?
