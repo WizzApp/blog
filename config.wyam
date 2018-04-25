@@ -6,5 +6,7 @@ Settings[Keys.Host] = "daniel-rosendorf.de";
 Settings[BlogKeys.Title] = "Daniel's Blog";
 Settings[BlogKeys.Description] = "Welcome to Daniel's blog!";
 Settings[BlogKeys.PostsPath] = "blog";
+Settings[BlogKeys.NetlifyRedirects] = true;
+Settings[BlogKeys.MetaRefreshRedirects] = false;
 
 // Add any pipeline customizations here
