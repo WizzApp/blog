@@ -1,8 +1,5 @@
 ---
-layout: post
 title: "Learning something new"
-date: 2015-03-04 15:58:12 +0100
-comments: true
 tags: [software development]
 RedirectFrom: blog/2015/03/04/learning-something-new/index.html
 ---

@@ -1,9 +1,5 @@
 ---
-layout: post
 title: "Brainstorming: Living documentation"
-date: 2013-08-15 15:33
-comments: true
-categories: [brainstorming, software development]
 tags: [brainstorming, software development, living documentation, software architecture, practices, specifcation by example]
 RedirectFrom: blog/2013/08/02/brainstorming-living-documentation/index.html
 ---

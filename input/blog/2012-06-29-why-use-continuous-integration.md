@@ -1,9 +1,5 @@
 ---
-layout: post
 title: "Why use Continuous Integration?"
-date: 2012-08-01 11:03
-comments: true
-categories: [software development, tools, practices]
 tags: [software development, tools, practices, continuous integration, development workflow, automatic build]
 RedirectFrom: blog/2012/06/29/why-use-continuous-integration/index.html
 ---

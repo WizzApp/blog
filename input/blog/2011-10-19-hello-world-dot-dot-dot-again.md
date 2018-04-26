@@ -1,9 +1,5 @@
 ---
-layout: post
 title: "Hello World ... again"
-date: 2011-10-19 11:58
-comments: true
-categories: blogging 
 tags: blogging
 RedirectFrom: blog/2011/10/19/hello-world-dot-dot-dot-again/index.html
 ---

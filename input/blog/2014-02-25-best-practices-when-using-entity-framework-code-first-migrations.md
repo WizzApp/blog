@@ -1,9 +1,5 @@
 ---
-layout: post
 title: "Best practices when using Entity Framework Code First Migrations"
-date: 2014-02-25 12:23:20 +0100
-comments: true
-categories: [software development, entity framework, CSharp, .NET]
 tags: [entity framework, code first, migrations]
 RedirectFrom: blog/2014/02/25/best-practices-when-using-entity-framework-code-first-migrations/index.html
 ---

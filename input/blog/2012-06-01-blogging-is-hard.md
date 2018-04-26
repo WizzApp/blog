@@ -1,9 +1,5 @@
 ---
-layout: post
 title: "Blogging is hard"
-date: 2012-06-01 14:35
-comments: true
-categories: blogging
 tags: blogging
 RedirectFrom: blog/2012/06/01/blogging-is-hard/index.html
 ---
