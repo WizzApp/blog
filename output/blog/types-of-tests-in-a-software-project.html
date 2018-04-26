@@ -1,0 +1,173 @@
+﻿
+<!DOCTYPE html>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html lang="en">
+
+	<head>
+		<title>Daniel&#x27;s Blog - Types of tests in a software project</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1" />		
+        <link href="/assets/css/highlight.css" rel="stylesheet">
+		<!--[if lte IE 8]><script src="/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="/assets/css/ie8.css" /><![endif]-->
+        <link href="/assets/css/override.css" rel="stylesheet" />
+
+		<meta name="description" content="Musings about software development, coding ... and other stuff" />
+		<link type="application/rss+xml" rel="alternate" title="Daniel&#x27;s Blog" href="/feed.rss" />
+				<link type="application/atom+xml" rel="alternate" title="Daniel&#x27;s Blog" href="/feed.atom" />
+		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+		<meta name="application-name" content="Daniel&#x27;s Blog" />
+		<meta name="msapplication-tooltip" content="Daniel&#x27;s Blog" />
+		<meta name="msapplication-starturl" content="/" />
+
+		<meta property="og:title" content="Daniel&#x27;s Blog - Types of tests in a software project" /> 
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="http://daniel-rosendorf.de/blog/types-of-tests-in-a-software-project" />
+		<!-- TODO: More social graph meta tags -->
+
+        <script src="/assets/js/highlight.pack.js"></script>   
+		
+        
+
+		
+	</head>
+
+	<body>
+		<!-- Wrapper -->
+		<div id="wrapper">
+
+			<!-- Header -->
+			<header id="header">
+				<div class="inner">
+
+					<!-- Logo -->
+					<a href="/" class="logo">
+						<span class="title">Daniel&#x27;s Blog</span>
+					</a>
+
+					<!-- Nav -->
+					<nav>
+						<ul>
+							<li><a href="#menu">Menu</a></li>
+						</ul>
+					</nav>
+
+				</div>
+			</header>
+
+			<!-- Menu -->
+			<nav id="menu">
+				<h2>Menu</h2>
+				<ul>
+					        <li><a href="/blog">Archive</a></li>
+        <li><a href="/tags">Tags</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/assets/img/license">License</a></li>
+
+				</ul>
+			</nav>
+
+			<!-- Main -->
+			<div id="main">
+				<div class="inner">
+
+    
+<header>
+    <h1>Types of tests in a software project</h1>
+            <p><em>Published on 10 Juli 2013</em></p>
+            <ul class="actions small">
+                    <li><a role="button" href="/tags/acceptance-tests" class="button small">acceptance tests</a></li>
+                    <li><a role="button" href="/tags/automated-testing" class="button small">automated testing</a></li>
+                    <li><a role="button" href="/tags/automated-tests" class="button small">automated tests</a></li>
+                    <li><a role="button" href="/tags/definition" class="button small">definition</a></li>
+                    <li><a role="button" href="/tags/integration-tests" class="button small">integration tests</a></li>
+                    <li><a role="button" href="/tags/practices" class="button small">practices</a></li>
+                    <li><a role="button" href="/tags/software-development" class="button small">software development</a></li>
+                    <li><a role="button" href="/tags/unit-tests" class="button small">unit tests</a></li>
+        </ul>     
+</header>
+
+					
+					<div id="content">
+						
+
+<h3 id="disclaimer">Disclaimer</h3>
+<p>The following descriptions and definitions are purely based on my own experience and knowledge. People will disagree. So be it ;-). I'm willing to talk about every definition in this post.</p>
+<h3 id="types-of-tests">Types of tests</h3>
+<ol>
+<li><p><strong>Unit test</strong><br />
+Typically automated, this kind of tests exercises a single method in a system. In unit tests all external dependencies are mocked so that the tested code is completely isolated. Isolation in this case leads to a test that runs purely in memory as accessing a database of the filesystem would make this an integration test (see below).</p>
+</li>
+<li><p><strong>Integration test</strong><br />
+Normally automated as well this kind of test does test a set of components and their interactions and their integration into the whole (thus the name integration test).</p>
+</li>
+<li><p><strong>Acceptance test</strong><br />
+An acceptance test is another kind of integration test. Its goal is to verify that specific acceptance criterions (which are usually specified on a user story) are met when implementing a specific story.</p>
+</li>
+<li><p><strong>User interface tests</strong><br />
+User interface tests drive the system through its user interface. Integration or acceptance tests may do this through special interfaces or on a layer just below the UI but a UI tests usually simulates a real user interaction like clicking a button or selecting an item in a dropdown.</p>
+</li>
+</ol>
+<h3 id="its-all-just-words">It's all just words</h3>
+<p>Those are the types of tests that come to my mind at the moment. There are more and there are also other names for some of those tests above. Also the definition varies from developer to developer (and that's good ;-). Nevertheless at least inside of a team a common vocabulary should be used for specific test types.</p>
+<p>I hope this definitions help a little.</p>
+
+
+<ul class="share-buttons">
+  <li><a href="https://twitter.com/intent/tweet?source=https%3A%2F%2Fwww.daniel-rosendorf.de%2F&text=:%20https%3A%2F%2Fwww.daniel-rosendorf.de%2F&via=drosendorf" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;"><img alt="Tweet" src="../assets/img/Twitter.svg" /></a></li>
+  <li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.daniel-rosendorf.de%2F&quote=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&quote=' + encodeURIComponent(document.URL)); return false;"><img alt="Share on Facebook" src="../assets/img/Facebook.svg" /></a></li>
+  <li><a href="mailto:?subject=&body=:%20https%3A%2F%2Fwww.daniel-rosendorf.de%2F" target="_blank" title="Send email" onclick="window.open('mailto:?subject=' + encodeURIComponent(document.title) + '&body=' +  encodeURIComponent(document.URL)); return false;"><img alt="Send email" src="../assets/img/Email.svg" /></a></li>
+</ul>
+<script src="https://utteranc.es/client.js"
+        repo="WizzApp/blog"
+        issue-term="pathname"
+        async>
+</script>
+					</div>
+				</div>
+			</div>
+
+			<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+    <section>
+        <h2>Feeds</h2>
+        <ul class="actions small vertical">
+            <li><a href="/feed.rss" class="button small"><i class="fa fa-rss"></i> RSS Feed</a></li>
+                        <li><a href="/feed.atom" class="button small"><i class="fa fa-rss"></i> Atom Feed</a></li>
+        </ul>
+    </section>
+    <section>
+    </section>
+    <ul class="copyright">
+        <li>Copyright © 2018</li>
+        <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+        <li><a href="https://wyam.io">Generated by Wyam</a></li>
+    </ul>
+</div>
+
+			</footer>
+
+		</div>
+		
+		
+
+		<!-- Scripts -->
+		<script>hljs.initHighlightingOnLoad();</script>
+		<script src="/assets/js/jquery.min.js"></script>
+		<script src="/assets/js/skel.min.js"></script>
+		<script src="/assets/js/util.js"></script>
+		<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
+		<script src="/assets/js/main.js"></script>
+
+	</body>
+
+</html>

@@ -1,0 +1,177 @@
+﻿
+<!DOCTYPE html>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html lang="en">
+
+	<head>
+		<title>Daniel&#x27;s Blog - Brainstorming: Automatic updates for Winforms/WPF applications</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1" />		
+        <link href="/assets/css/highlight.css" rel="stylesheet">
+		<!--[if lte IE 8]><script src="/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="/assets/css/ie8.css" /><![endif]-->
+        <link href="/assets/css/override.css" rel="stylesheet" />
+
+		<meta name="description" content="Musings about software development, coding ... and other stuff" />
+		<link type="application/rss+xml" rel="alternate" title="Daniel&#x27;s Blog" href="/feed.rss" />
+				<link type="application/atom+xml" rel="alternate" title="Daniel&#x27;s Blog" href="/feed.atom" />
+		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+		<meta name="application-name" content="Daniel&#x27;s Blog" />
+		<meta name="msapplication-tooltip" content="Daniel&#x27;s Blog" />
+		<meta name="msapplication-starturl" content="/" />
+
+		<meta property="og:title" content="Daniel&#x27;s Blog - Brainstorming: Automatic updates for Winforms/WPF applications" /> 
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="http://daniel-rosendorf.de/blog/brainstorming-automatic-updates-for-winforms-slash-wpf-applications" />
+		<!-- TODO: More social graph meta tags -->
+
+        <script src="/assets/js/highlight.pack.js"></script>   
+		
+        
+
+		
+	</head>
+
+	<body>
+		<!-- Wrapper -->
+		<div id="wrapper">
+
+			<!-- Header -->
+			<header id="header">
+				<div class="inner">
+
+					<!-- Logo -->
+					<a href="/" class="logo">
+						<span class="title">Daniel&#x27;s Blog</span>
+					</a>
+
+					<!-- Nav -->
+					<nav>
+						<ul>
+							<li><a href="#menu">Menu</a></li>
+						</ul>
+					</nav>
+
+				</div>
+			</header>
+
+			<!-- Menu -->
+			<nav id="menu">
+				<h2>Menu</h2>
+				<ul>
+					        <li><a href="/blog">Archive</a></li>
+        <li><a href="/tags">Tags</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/assets/img/license">License</a></li>
+
+				</ul>
+			</nav>
+
+			<!-- Main -->
+			<div id="main">
+				<div class="inner">
+
+    
+<header>
+    <h1>Brainstorming: Automatic updates for Winforms/WPF applications</h1>
+            <p><em>Published on 24 November 2011</em></p>
+            <ul class="actions small">
+                    <li><a role="button" href="/tags/NET" class="button small">.NET</a></li>
+                    <li><a role="button" href="/tags/automatic-updates" class="button small">automatic updates</a></li>
+                    <li><a role="button" href="/tags/brainstorming" class="button small">brainstorming</a></li>
+                    <li><a role="button" href="/tags/CSharp" class="button small">CSharp</a></li>
+                    <li><a role="button" href="/tags/software-development" class="button small">software development</a></li>
+                    <li><a role="button" href="/tags/windows-forms" class="button small">windows forms</a></li>
+                    <li><a role="button" href="/tags/WPF" class="button small">WPF</a></li>
+        </ul>     
+</header>
+
+					
+					<div id="content">
+						
+
+<p><em>This post is the first of a collection of <a href="/blog/categories/brainstorming/">brainstorming</a> articles I'll write in the near future. These are primarily meant to note down my thoughts on specific projects and/or feature implementations etc.</em></p>
+<p>Currently a lot of ideas whirl around in my head (which have nothing to do with my potential future project, of course ;-). One of those is an automatic update feature for windows client applications.</p>
+<p>The idea is that there are two main components:</p>
+<ul>
+<li>An update server which is a web service of some kind. This server would include some tooling to allow for easier package creation (more on that later).</li>
+<li>A client library which you can use to enable automatic updates. This may include dialogs for user notification.</li>
+</ul>
+<h3 id="the-client">The client</h3>
+<p>The application using the client would include a public key. The packages provided by the update server would be simple zip archives containing an xml file with relevant data (name of the application, version etc.) and the updated component (either an msi file or a dll for simple plugins). The xml file also contains a SHA1 hash of the updated component and will be signed with the private key corresponding to the public key stored in the application.</p>
+<p>On startup or whenever the client application would check the update server for updates like this:
+{% gist 1391207 ClientApplication.cs %}</p>
+<p>The client can also send additional data (like license keys etc.) as an optional parameter in the GetVersionInfo method which may then be processed by the update server. This would change the webervice call above to something like this:
+{% gist 1391207 ClientApplication2.cs %}</p>
+<p>If the user chooses to download the update, the client application will download the whole zip file, extract it and first verify the signature of the xml file against the embedded public key and then the SHA1 hash against the downloaded update to verify its integrity. This should avoid most of the security risks as long as the update server is called via https and has a valid certificate.</p>
+<p>The developer of the application will be able to choose whether a valid ssl certificate will be enforced on the client or not.</p>
+<h3 id="the-server">The server</h3>
+<p>As mentioned above the server stores update packages and provides a webservice to retrieve the current available version of an application and the update itself.</p>
+<p>The server should store those updates in a single directory (maybe one subfolder for each application or updatable component). In the first step the server would only support the creation of the update package via a command line tool (e.g. a Powershell script):
+{% gist 1391207 CreatePackage.ps1 %}</p>
+<p>This will ask the user for the passphrase for the private key and generate the xml file with the hash and signature automatically. It will also copy the output (both the update component and the xml file) to the directory provided in the --out parameter.</p>
+<p>The zip file for download will be created and cached on demand by the server. Later on a push of updates via the webservice itself may be implemented.</p>
+<p>When the client asks for the version info the server will return the values from the xml in the applicable application subfolder. This means the client is responsible for checking if the provided version is newer or not.</p>
+<p>Handling of additional data provided by the GetVersionInfo call can be easily added to the service by adding a custom version handler to an internal dictionary:
+{% gist 1391207 Webservice.cs %}</p>
+<p>This is what I have in mind so far, I guess there will be a follow up post to this when more thoughts come up ;-)</p>
+
+
+<ul class="share-buttons">
+  <li><a href="https://twitter.com/intent/tweet?source=https%3A%2F%2Fwww.daniel-rosendorf.de%2F&text=:%20https%3A%2F%2Fwww.daniel-rosendorf.de%2F&via=drosendorf" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;"><img alt="Tweet" src="../assets/img/Twitter.svg" /></a></li>
+  <li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.daniel-rosendorf.de%2F&quote=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&quote=' + encodeURIComponent(document.URL)); return false;"><img alt="Share on Facebook" src="../assets/img/Facebook.svg" /></a></li>
+  <li><a href="mailto:?subject=&body=:%20https%3A%2F%2Fwww.daniel-rosendorf.de%2F" target="_blank" title="Send email" onclick="window.open('mailto:?subject=' + encodeURIComponent(document.title) + '&body=' +  encodeURIComponent(document.URL)); return false;"><img alt="Send email" src="../assets/img/Email.svg" /></a></li>
+</ul>
+<script src="https://utteranc.es/client.js"
+        repo="WizzApp/blog"
+        issue-term="pathname"
+        async>
+</script>
+					</div>
+				</div>
+			</div>
+
+			<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+    <section>
+        <h2>Feeds</h2>
+        <ul class="actions small vertical">
+            <li><a href="/feed.rss" class="button small"><i class="fa fa-rss"></i> RSS Feed</a></li>
+                        <li><a href="/feed.atom" class="button small"><i class="fa fa-rss"></i> Atom Feed</a></li>
+        </ul>
+    </section>
+    <section>
+    </section>
+    <ul class="copyright">
+        <li>Copyright © 2018</li>
+        <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+        <li><a href="https://wyam.io">Generated by Wyam</a></li>
+    </ul>
+</div>
+
+			</footer>
+
+		</div>
+		
+		
+
+		<!-- Scripts -->
+		<script>hljs.initHighlightingOnLoad();</script>
+		<script src="/assets/js/jquery.min.js"></script>
+		<script src="/assets/js/skel.min.js"></script>
+		<script src="/assets/js/util.js"></script>
+		<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
+		<script src="/assets/js/main.js"></script>
+
+	</body>
+
+</html>

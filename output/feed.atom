@@ -1,0 +1,581 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+	<link rel="self" href="http://daniel-rosendorf.de/" />
+	<id>http://daniel-rosendorf.de/</id>
+	<title>Daniel's Blog</title>
+	<rights>2018</rights>
+	<updated>2018-06-14T05:57:55Z</updated>
+	<subtitle>Musings about software development, coding ... and other stuff</subtitle>
+	<entry>
+		<link href="http://daniel-rosendorf.de/blog/handling-internal-url-parameters" />
+		<id>http://daniel-rosendorf.de/blog/handling-internal-url-parameters</id>
+		<title>Handling internal URL parameters</title>
+		<updated>2018-06-14T00:00:00Z</updated>
+		<content>&lt;p&gt;Yesterday I tweeted this&lt;blockquote class="twitter-tweet" data-lang="en" data-dnt="true"&gt;&lt;p lang="en" dir="ltr"&gt;Dear Twitter: IMO changing URL parameters manually is not a use case and I will not go the extra mile in my application to handle those cases. Discuss! ;-)&lt;/p&gt;— Daniel Rosendorf (&amp;#64;drosendorf) &lt;a href="https://twitter.com/drosendorf/status/1006807933185937408?ref_src=twsrc%5Etfw"&gt;13. Juni 2018&lt;/a&gt;&lt;/blockquote&gt;&lt;/p&gt;
+&lt;script async src="https://platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
+&lt;p&gt;and got some answers and questions from colleagues, so I decided to elaborate a bit.&lt;/p&gt;
+&lt;p&gt;In our current project we build a web application that supports regional instances. For this to work correctly, the user selects a country during registration and immediately gets redirected to the instance corresponding to his selected country if necessary. The instance we redirect to lives under another (sub-)domain, so we are providing the already selected country as a URL parameter. This avoids that the user has to select the country again after the redirect.&lt;/p&gt;
+&lt;p&gt;We have two links on this page which depend on the selected country. So on each country change which does not trigger an instance redirect, we trigger an event that updates those link targets. This event is normally not triggered when the URL parameter in the navigation bar is changed after the page is already loaded. My coworker added a few lines of code to handle this case as well (he is a very thorough person ;-) ).&lt;/p&gt;
+&lt;p&gt;And this is the point I want to talk about ...&lt;/p&gt;
+&lt;p&gt;I would not have done this, simply because manually changing the parameter in the URL is not a relevant use case. The parameter is a technical detail which helps us make the application work as expected. To be clear: I have no problem with the few extra lines of code (they are in there and they will stay) and they will probably save us a few extra support cases. But if you are meddling with the URL parameters in my web application, you are doing something that you should not do and therefore I won't spent any time on helping you with this.&lt;/p&gt;
+&lt;p&gt;P.S. In any case you should validate URL parameters as any other user provided input to ensure the security of your application!&lt;/p&gt;
+</content>
+		<summary>&lt;p&gt;Yesterday I tweeted this&lt;/p&gt;</summary>
+	</entry>
+	<entry>
+		<link href="http://daniel-rosendorf.de/blog/moving-the-blog" />
+		<id>http://daniel-rosendorf.de/blog/moving-the-blog</id>
+		<title>Moving the blog</title>
+		<updated>2018-04-27T00:00:00Z</updated>
+		<content>&lt;p&gt;Short update: I'm moving away from using Octopress and my own virtual server to build and host this blog. Instead from now on I will be using &lt;a href="https://wyam.io"&gt;Wyam&lt;/a&gt; to build and &lt;a href="https://netlify.com"&gt;Netlify&lt;/a&gt; to host it. Comments will be powered by Github or more exactly &lt;a href="https://utteranc.es"&gt;utterances&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Why? I realized that I do not need the infrastructure of a whole virtual server to host this blog. If I want a server to host a project I can use one hosted in the cloud and spun up on demand. This reduces costs and makes it easier for me to actually blog (hopefully ;-)).&lt;/p&gt;
+&lt;p&gt;Using utterances allows me to host comments to blog posts on Github which should not be a problem, considering that the main audience of my blog are supposed to be developers. And Netlify has its own CDN. Together with code hosting on Github this is basically an instant win for me ;-).&lt;/p&gt;
+</content>
+		<summary>&lt;p&gt;Short update: I'm moving away from using Octopress and my own virtual server to build and host this blog. Instead from now on I will be using &lt;a href="https://wyam.io"&gt;Wyam&lt;/a&gt; to build and &lt;a href="https://netlify.com"&gt;Netlify&lt;/a&gt; to host it. Comments will be powered by Github or more exactly &lt;a href="https://utteranc.es"&gt;utterances&lt;/a&gt;.&lt;/p&gt;</summary>
+	</entry>
+	<entry>
+		<link href="http://daniel-rosendorf.de/blog/updates-to-the-site" />
+		<id>http://daniel-rosendorf.de/blog/updates-to-the-site</id>
+		<title>Updates to the Site</title>
+		<updated>2016-02-02T00:00:00Z</updated>
+		<content>&lt;p&gt;Since changing the layout of the blog I also did some optimizations to enhance it a little bit. Most of those enhancements were proposed by Google PageSpeed, another one I took from the theme setup pages of the used theme, others are more or less mandated by law ;-).&lt;/p&gt;
+&lt;p&gt;So what did I do?&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;I optimized the used feature image and my &amp;quot;avatar&amp;quot; using &lt;a href="http://jpegclub.org/"&gt;jpegtran&lt;/a&gt; which decreased the initial file size by about 10 percent for each image.&lt;/li&gt;
+&lt;li&gt;I changed my Nginx config to send out &lt;em&gt;Cache-Control&lt;/em&gt; and &lt;em&gt;Expires&lt;/em&gt; headers for all static assets set to 1 year from request. Here is the config snippet I added to the corresponding server directive:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;{% highlight Nginx %}
+location ~* .(js|css|png|jpg|jpeg|gif|ico)$ {
+expires 1y;
+}
+{% endhighlight %}&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;I added the async attribute to some of the locally hosted scripts to hopefully shave of a little time by asynchronously executing scripts.&lt;/li&gt;
+&lt;li&gt;I also added a basic cookie consent notification using &lt;a href="https://silktide.com/tools/cookie-consent/"&gt;Cookie Consent&lt;/a&gt; and a little cookie policy site (located &lt;a href="/cookiepolicy/"&gt;here&lt;/a&gt;). The text is more or less shamelessly stolen from &lt;a href="https://silktide.com/privacy-policy/"&gt;Silktides own privacy policy site&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Next I added support for responsive images using the &lt;a href="https://github.com/robwierzbowski/jekyll-picture-tag"&gt;Jekyll Picture Tag&lt;/a&gt; plugin suggested in the original &lt;a href="https://mmistakes.github.io/minimal-mistakes/theme-setup/"&gt;theme setup pages&lt;/a&gt; of the &lt;a href="https://mmistakes.github.io/minimal-mistakes/"&gt;Minimal Mistakes&lt;/a&gt; theme.&lt;/li&gt;
+&lt;li&gt;And last but not least I added &lt;a href="https://github.com/penibelst/jekyll-compress-html"&gt;Jekyll HTML compression&lt;/a&gt; to compress the generated HTML just a little bit. This reduces the index page by about 1570 bytes (which is by about 16 percent) using the following settings:
+{% highlight Yaml %}
+compress_html:
+clippings: all
+comments: [&amp;quot;&lt;!-- ", " --&gt;&amp;quot;]
+endings: all
+ignore:
+envs: []
+blanklines: false
+profile: false
+startings: [html, head, body]
+{% endhighlight %}
+It's not much, but it's not bad either and it depends on what markup to original markdown document contains, so numbers will differ.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;All in all those are all just micro optimizations but I learned some new stuff and I won't have to do it in the future.&lt;/p&gt;
+</content>
+		<summary>&lt;p&gt;Since changing the layout of the blog I also did some optimizations to enhance it a little bit. Most of those enhancements were proposed by Google PageSpeed, another one I took from the theme setup pages of the used theme, others are more or less mandated by law ;-).&lt;/p&gt;</summary>
+	</entry>
+	<entry>
+		<link href="http://daniel-rosendorf.de/blog/changes" />
+		<id>http://daniel-rosendorf.de/blog/changes</id>
+		<title>Changes</title>
+		<updated>2016-01-25T00:00:00Z</updated>
+		<content>&lt;p&gt;It is now the year 2016 and as always things change. But this year is special for me and my family. Things are happening or have already happened, so here is a short overview ...&lt;/p&gt;
+&lt;h1 id="the-bad"&gt;The bad&lt;/h1&gt;
+&lt;p&gt;Unfortunately, this year it will not only be good, but there is also something pretty bad coming up. I will not elaborate too much (there will be probably a separate post in a few months about this), let's just say that there is some hospital time coming up for our smallest kid and that my wife and I are pretty shaken because of this.&lt;/p&gt;
+&lt;h1 id="both-good-and-bad"&gt;Both good and bad&lt;/h1&gt;
+&lt;p&gt;Next up is something that is both good and bad: I'm going to leave my current employer for a new one. This is bad because I like my current workplace. I like the people, I like the work (at least, most of the time ;-). So why am I going? I feel like I'm not learning stuff as fast as I could. I need people that are as interested in technology and sharing their wisdom about it and other things as much as I am and that is something that's missing currently. Mind you, it will change but I also need some fresh air.&lt;/p&gt;
+&lt;p&gt;I've been ten years with my current employer and I've grown restless in the last years, so I finally decided (with a little push from my wife ;-) to do something about it. And so in march I'm off to new adventures.&lt;/p&gt;
+&lt;h1 id="only-good"&gt;Only good&lt;/h1&gt;
+&lt;p&gt;The site was updated a little bit. New layout, a little bit of new technology. While up until now the site was generated by Octopress (which in turn uses Jekyll), the new layout uses mainly Jekyll with some Octopress plugins sprinkled on.&lt;/p&gt;
+&lt;p&gt;This also changes my blogging workflow. Until this change, I generated the site locally and pushed the generated site onto the server which in turn copied it over to the served directory.
+Now I only push the source, generation of the final pages is actually done on the server. This allows me to use SSH on my tablet to work on posts as well, so I should be able to blog a little bit more.
+&lt;br /&gt;
+&lt;br /&gt;
+And that's the list for now ...&lt;/p&gt;
+</content>
+		<summary>&lt;p&gt;It is now the year 2016 and as always things change. But this year is special for me and my family. Things are happening or have already happened, so here is a short overview ...&lt;/p&gt;</summary>
+	</entry>
+	<entry>
+		<link href="http://daniel-rosendorf.de/blog/learning-something-new" />
+		<id>http://daniel-rosendorf.de/blog/learning-something-new</id>
+		<title>Learning something new</title>
+		<updated>2015-03-04T00:00:00Z</updated>
+		<content>&lt;h2 id="tldr"&gt;TL;DR;&lt;/h2&gt;
+&lt;p&gt;I've been coding in C# for more than 10 years now and last week I realized that I feel at home in this language. I feel comfortable in the language, but strangely I do not feel comfortable with this feeling itself ;-)&lt;/p&gt;
+&lt;h2 id="whats-been-happening"&gt;What's been happening&lt;/h2&gt;
+&lt;p&gt;For the last few weeks I've been involved in a project customizing a DMS for a customer. This customization is mostly done in a strange combination of Java and JavaScript. After a few weeks of coding, I had an excuse to work with C# again and this felt like seeing the day after a very long night. I feel at home when I'm coding C#. Maybe that's because of the almost 10 years of experience I have in that language. But this also made me think. It's time to learn something new, to increase the size of my comfort zone.&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;h2 id="the-list"&gt;The list&lt;/h2&gt;
+&lt;p&gt;So here are a few things I want to delve into in the near and not so near future:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="http://elixir-lang.org/"&gt;Elixir&lt;/a&gt;&lt;br /&gt;
+A quite new language based on Erlang/OTP which should make it the perfect language to implement a web API. The idea is to use the &lt;a href="http://chimera.labs.oreilly.com/books/1234000001642"&gt;Études for Elixir&lt;/a&gt; ebook as an outline for the exercises to get into the language. The solutions will be available on the my corresponding &lt;a href="https://github.com/WizzApp/EtudesForElixir"&gt;repository&lt;/a&gt; on Github.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="http://aurelia.io"&gt;Aurelia&lt;/a&gt;&lt;br /&gt;
+A new JavaScript client framework developed &lt;a href="http://twitter.com/&amp;#64;EisenbergEffect"&gt;Rob Eisenberg&lt;/a&gt; which looks very nice. The &lt;a href="http://aurelia.io/get-started.html"&gt;Get Started Guide&lt;/a&gt; should provide a pretty good introduction.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Other things on the list include flexbox layouts (which should also help me get into CSS in general ;-), &lt;a href="http://facebook.github.io/react/"&gt;React&lt;/a&gt;, &lt;a href="http://oauth.net/2/"&gt;OAuth 2.0&lt;/a&gt; and &lt;a href="http://openid.net/connect/"&gt;OpenID Connect&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;That should pretty much keep my from being bored outside of my day job, so let's see how this works out.&lt;/p&gt;
+</content>
+		<summary>&lt;p&gt;I've been coding in C# for more than 10 years now and last week I realized that I feel at home in this language. I feel comfortable in the language, but strangely I do not feel comfortable with this feeling itself ;-)&lt;/p&gt;
+
+&lt;p&gt;For the last few weeks I've been involved in a project customizing a DMS for a customer. This customization is mostly done in a strange combination of Java and JavaScript. After a few weeks of coding, I had an excuse to work with C# again and this felt like seeing the day after a very long night. I feel at home when I'm coding C#. Maybe that's because of the almost 10 years of experience I have in that language. But this also made me think. It's time to learn something new, to increase the size of my comfort zone.&lt;/p&gt;</summary>
+	</entry>
+	<entry>
+		<link href="http://daniel-rosendorf.de/blog/i-need-someone-to-watch-my-back" />
+		<id>http://daniel-rosendorf.de/blog/i-need-someone-to-watch-my-back</id>
+		<title>I need someone to watch my back</title>
+		<updated>2015-01-16T00:00:00Z</updated>
+		<content>&lt;h3 id="tldr"&gt;TL;DR;&lt;/h3&gt;
+&lt;p&gt;Writing code alone is not easy for me. I tend to get carried away or run into dead ends without someone occasionally steering my back to where I actually should be headed.&lt;/p&gt;
+&lt;h3 id="a-little-bit-of-an-introduction"&gt;A little bit of an introduction&lt;/h3&gt;
+&lt;p&gt;Yesterday I had a talk with a coworker of mine. Somehow we reached the topic of software development and teams in general and I started to talk about how I'm not good in writing code when I do not have someone to help me.&lt;/p&gt;
+&lt;h3 id="working-alone-sucks"&gt;Working alone sucks&lt;/h3&gt;
+&lt;p&gt;And that is coming from me, a self-proclaimed introvert ;-). The problem is that you do not get to talk about your problems the way you sometimes just have to do to think them through from end to end. Also you do not have anyone that immediately sees your code, hence no incentive to actually keep it clean and readable.&lt;/p&gt;
+&lt;h3 id="why-do-you-actually-need-this"&gt;Why do you actually need this?&lt;/h3&gt;
+&lt;p&gt;Because I'm lazy. Actually taking care of your code is WORK (no way, really??) and takes time, but it pays off in the long run. Nevertheless one tends to just skip it if he has as much to do as I do in my current project. So a second developer in this case is more of a watch dog. Or not. Of course the additional help is appreciated as well ;-).&lt;/p&gt;
+</content>
+		<summary>&lt;p&gt;Writing code alone is not easy for me. I tend to get carried away or run into dead ends without someone occasionally steering my back to where I actually should be headed.&lt;/p&gt;</summary>
+	</entry>
+	<entry>
+		<link href="http://daniel-rosendorf.de/blog/kiss-or-how-i-wasted-two-work-days" />
+		<id>http://daniel-rosendorf.de/blog/kiss-or-how-i-wasted-two-work-days</id>
+		<title>Kiss or how I wasted two work days</title>
+		<updated>2015-01-09T00:00:00Z</updated>
+		<content>&lt;p&gt;{% blockquote Wikipedia &lt;a href="http://en.wikipedia.org/wiki/KISS_principle"&gt;http://en.wikipedia.org/wiki/KISS_principle&lt;/a&gt; KISS principle %}
+The KISS principle states that most systems work best if they are kept simple rather than made complicated; therefore simplicity should be a key goal in design and unnecessary complexity should be avoided
+{% endblockquote %}&lt;/p&gt;
+&lt;p&gt;Today I realized that I wasted almost two days worth of work because I tried to solve problems I did not (yet) have. KISS as defined by the quote above is about keeping things simple, but in my understanding it is also about not doing things that you really do not need.&lt;/p&gt;
+&lt;h3 id="my-problem"&gt;My problem&lt;/h3&gt;
+&lt;p&gt;I tend to see problems where no problems are. To be more specific, I start to implement a solution to a problem at hand and almost immediately I start to think about future problems that my solution could solve as well. But in the worst case this distracts me that much from the actual problem that I start to lose focus. In this concrete example I'm talking about I worked 12 hours and the final solution did not solve my problem because I missed some details of my initial problem ... 12 hours wasted!&lt;/p&gt;
+&lt;h3 id="the-solution"&gt;The solution&lt;/h3&gt;
+&lt;p&gt;Simple: Focus on the real problem. Ignore anything else that might come up. KISS. If there are future problems where the solution could come handy, I will see it, adapt the initial solution and maybe get something more generic out of the code, but first comes the real problem.&lt;/p&gt;
+&lt;h3 id="but-the-funny-thing-is"&gt;But the funny thing is ...&lt;/h3&gt;
+&lt;p&gt;... I'm not actually a fan of generic solutions. Most of the time I actively oppose solving problems that do not yet exist when one of my coworkers asks me for advice. Yet I still fall into this trap. Why is that? I don't know (that topic is for another post), but mark my words: From this day on I shall focus on the problem at hand and only on the problem at hand ;-)&lt;/p&gt;
+</content>
+		<summary>&lt;p&gt;{% blockquote Wikipedia &lt;a href="http://en.wikipedia.org/wiki/KISS_principle"&gt;http://en.wikipedia.org/wiki/KISS_principle&lt;/a&gt; KISS principle %}
+The KISS principle states that most systems work best if they are kept simple rather than made complicated; therefore simplicity should be a key goal in design and unnecessary complexity should be avoided
+{% endblockquote %}&lt;/p&gt;</summary>
+	</entry>
+	<entry>
+		<link href="http://daniel-rosendorf.de/blog/week-21-2014" />
+		<id>http://daniel-rosendorf.de/blog/week-21-2014</id>
+		<title>Week 21, 2014</title>
+		<updated>2014-05-19T00:00:00Z</updated>
+		<content>&lt;p&gt;Ok, it has been a while since my &lt;a href="/blog/2014/03/24/week-13-2014"&gt;last weekly post&lt;/a&gt;. What happened? Well, work happened, as always. Also something big changed in my personal life. In between there was another &lt;a href="http://elo.com/"&gt;ELO&lt;/a&gt; training which kept me busy for a whole week and now there are introductions into a new (old) project. So, now review this time because I actually do not really remember the work done in the last view weeks. But the goals are still here ;-).&lt;/p&gt;
+&lt;h1 id="the-goals"&gt;The goals&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;There will be blog post this week. A good colleague of mine and me talked about a little architectural solution and I want to test that out. And I will not keep the results or the process to myself.&lt;/li&gt;
+&lt;li&gt;Finish a very little project (a windows service with self-hosted web to control status and run jobs). This will probably end up in a blog post too ;-).&lt;/li&gt;
+&lt;li&gt;Do some work.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;On this note: Of to do some work, have a nice week!&lt;/p&gt;
+</content>
+		<summary>&lt;p&gt;Ok, it has been a while since my &lt;a href="/blog/2014/03/24/week-13-2014"&gt;last weekly post&lt;/a&gt;. What happened? Well, work happened, as always. Also something big changed in my personal life. In between there was another &lt;a href="http://elo.com/"&gt;ELO&lt;/a&gt; training which kept me busy for a whole week and now there are introductions into a new (old) project. So, now review this time because I actually do not really remember the work done in the last view weeks. But the goals are still here ;-).&lt;/p&gt;</summary>
+	</entry>
+	<entry>
+		<link href="http://daniel-rosendorf.de/blog/week-13-2014" />
+		<id>http://daniel-rosendorf.de/blog/week-13-2014</id>
+		<title>Week 13, 2014</title>
+		<updated>2014-03-24T00:00:00Z</updated>
+		<content>&lt;p&gt;So, what was up with last week? No post on monday and also no review. Well, I got kind of &amp;quot;sucked into&amp;quot; a training course for &lt;a href="http://elo.com/wcm/en/products/eloprofessional"&gt;ELO&lt;/a&gt;. It was interesting and also kept me away from my computer for the last week ;-). So without any further deviations on to the review and the goals for this week.&lt;/p&gt;
+&lt;h1 id="the-review"&gt;The review&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;The &lt;a href="/blog/2014/03/14/tools"&gt;blog post&lt;/a&gt; is done, have a look!&lt;/li&gt;
+&lt;li&gt;The prototype ... well, its still a prototype and I sadly did not find any time in the last two weeks to work on it.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;To be honest, I do not remember too much of the week before last, other than doing a rather satisfactory refactoring on a client project (actually, that was all I did that week ;-). It just feels good when you can replace an overly complex solution with a simpler one that has exactly the same functionality.&lt;/p&gt;
+&lt;p&gt;The training course last week was interesting although it covered just the basics. I heard that there is an advanced one covering scripting that I will probably attend as well. Let us see where this ends ...&lt;/p&gt;
+&lt;h1 id="the-goals"&gt;The goals&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Advance the prototype (depending on the time I have left over this week).&lt;/li&gt;
+&lt;li&gt;Find a topic for the next blog post.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The goals explain themselves, so I will not go into more detail here.&lt;/p&gt;
+&lt;p&gt;And now on to a new week.&lt;/p&gt;
+</content>
+		<summary>&lt;p&gt;So, what was up with last week? No post on monday and also no review. Well, I got kind of "sucked into" a training course for &lt;a href="http://elo.com/wcm/en/products/eloprofessional"&gt;ELO&lt;/a&gt;. It was interesting and also kept me away from my computer for the last week ;-). So without any further deviations on to the review and the goals for this week.&lt;/p&gt;</summary>
+	</entry>
+	<entry>
+		<link href="http://daniel-rosendorf.de/blog/tools" />
+		<id>http://daniel-rosendorf.de/blog/tools</id>
+		<title>Tools</title>
+		<updated>2014-03-13T00:00:00Z</updated>
+		<content>&lt;p&gt;As I said &lt;a href="/blog/2014/03/03/week-10-2014"&gt;last week&lt;/a&gt; I am going to talk a little bit about the tools I currently use/have installed on my dev machine. &amp;quot;Tools&amp;quot; in this case meaning almost everything, from languages/compilers to actual utilities and powershell scripts.&lt;/p&gt;
+&lt;p&gt;And to be honest, this is more for my own benefit as I need to keep track of all that so that I can rebuild it if necessary.&lt;/p&gt;
+&lt;p&gt;This will be just a list with links to the corresponding blog posts (or whatever) that helped me set the software up, so do not expect too much.&lt;/p&gt;
+&lt;p&gt;Here we go ...&lt;/p&gt;
+&lt;h1 id="command-line"&gt;Command line&lt;/h1&gt;
+&lt;p&gt;I am a fan of the command line interface. Not a wizard, but a fan. So here is a short overview over my setup:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="http://bliker.github.io/cmder/"&gt;Cmder&lt;/a&gt; as a host for my standard Powershell console.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="http://msysgit.github.io/*"&gt;msysgit&lt;/a&gt;. The only true SCM ;-) in its official windows version.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Powershell (of course) with some custom scripts and extensions in my profile:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="http://bradwilson.typepad.com/blog/2008/12/find-to-set-aliasps1.html"&gt;find-to-set-alias&lt;/a&gt; to set various aliases for Visual Studio and Sublime Text.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="http://psget.net/"&gt;PsGet&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="http://pscx.codeplex.com/"&gt;PowerShell Community Extensions&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="http://dahlbyk.github.io/posh-git/"&gt;posh-git&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;I also have a line with a call to vcvarsall.bat in my PS profile:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Invoke-BatchFile &amp;quot;C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat&amp;quot; x86
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This makes msbuild et al available so I can build most VS solutions from the shell as well.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Also ssh-agent is started when I start a Powershell session as described in &lt;a href="http://haacked.com/archive/2011/12/19/get-git-for-windows.aspx/"&gt;this post&lt;/a&gt; by Phil Haack.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="https://chocolatey.org/"&gt;Chocolatey&lt;/a&gt;. More or less the apt-get of the windows world ;-)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="http://scriptcs.net/"&gt;scriptcs&lt;/a&gt;. Write C# like it is a scripting language. Nice to play around with.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id="languages"&gt;Languages&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;.NET Framework (and various corresponding SDKs, of course).&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://nodejs.org/"&gt;nodejs&lt;/a&gt;. For all the JS development that I never come around to.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.ruby-lang.org"&gt;Ruby&lt;/a&gt;. You are not hip anymore without Ruby. Install with the &lt;a href="http://rubyinstaller.org/"&gt;RubyInstaller for Windows&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.python.org/"&gt;Python&lt;/a&gt;. Nothing to say here.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id="ides"&gt;IDEs&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Visual Studio&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.sublimetext.com/3"&gt;Sublime Text 3&lt;/a&gt;. I use that one for everything I do not use VS for ;-)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;That is all for now, but I am almost positively sure that I missed something, so I will very probably update this post in the future.&lt;/p&gt;
+</content>
+		<summary>&lt;p&gt;As I said &lt;a href="/blog/2014/03/03/week-10-2014"&gt;last week&lt;/a&gt; I am going to talk a little bit about the tools I currently use/have installed on my dev machine. "Tools" in this case meaning almost everything, from languages/compilers to actual utilities and powershell scripts.&lt;/p&gt;</summary>
+	</entry>
+	<entry>
+		<link href="http://daniel-rosendorf.de/blog/week-11-2014" />
+		<id>http://daniel-rosendorf.de/blog/week-11-2014</id>
+		<title>Week 11, 2014</title>
+		<updated>2014-03-10T00:00:00Z</updated>
+		<content>&lt;p&gt;As detailed in this &lt;a href="/blog/2014/03/03/week-10-2014"&gt;previous post&lt;/a&gt; I am going to blog about my goals for this week (as they are related to work and mildly relevant to you). What I start with today is also a review of the previous week. Oh, and by the way: The reviews will cover any other work related happening I decide to include (almost like a journal) besides the previous weeks goals. So, on to actual content ;-)&lt;/p&gt;
+&lt;h1 id="the-review"&gt;The review&lt;/h1&gt;
+&lt;p&gt;First, the goals:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;The tools blog post: I started it, but I am not yet sure on what level of detail I am going to write about this. I will very probably do just a short overview together with links and later go into more details (in additional blog posts).&lt;/li&gt;
+&lt;li&gt;The prototype: I started it and in the course dove a little into &lt;a href="https://jqueryui.com/"&gt;jQuery UI&lt;/a&gt; and the draggable, droppable and resizable widgets. Interesting stuff, but learning new things always makes me slow ;-)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Additionally, after 3 months on working on a rather interesting project that project got put on hold by our customer. I hope that is temporary because the project and the technologies used are quite interesting. I learned a lot in those months, so let's hope that the project continues.&lt;/p&gt;
+&lt;h1 id="the-goals"&gt;The goals&lt;/h1&gt;
+&lt;p&gt;The goals for this week are rather similar to those last week:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Finish the blog post.&lt;/li&gt;
+&lt;li&gt;Finish the prototype.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Also for the future I will try and choose goals that are actually doable for me in the coming week.&lt;/p&gt;
+&lt;p&gt;That's all folks.&lt;/p&gt;
+</content>
+		<summary>&lt;p&gt;As detailed in this &lt;a href="/blog/2014/03/03/week-10-2014"&gt;previous post&lt;/a&gt; I am going to blog about my goals for this week (as they are related to work and mildly relevant to you). What I start with today is also a review of the previous week. Oh, and by the way: The reviews will cover any other work related happening I decide to include (almost like a journal) besides the previous weeks goals. So, on to actual content ;-)&lt;/p&gt;</summary>
+	</entry>
+	<entry>
+		<link href="http://daniel-rosendorf.de/blog/week-10-2014" />
+		<id>http://daniel-rosendorf.de/blog/week-10-2014</id>
+		<title>Week 10, 2014</title>
+		<updated>2014-03-03T00:00:00Z</updated>
+		<content>&lt;h1 id="what-the"&gt;What the ... ?&lt;/h1&gt;
+&lt;p&gt;So the weekend was nice and I had time to think a little bit about this blog and my (practically) non-existent blogging habit. I want to change that, so here is what I am going to do:&lt;/p&gt;
+&lt;p&gt;Every monday I am going to write up a list of up to three goals (work or at least somewhat computer related to stay relevant for my also non-existent readers ;-) and will try to keep or reach them during the week.&lt;/p&gt;
+&lt;p&gt;The next thing the monday posts will also contain are a review of the past week and its goals. Obviously the monday posts will not be written when I am on vacation etc. but I will keep those posts as constant as possible (hear, hear! ;-)&lt;/p&gt;
+&lt;p&gt;So, enough babbling, on to the goals for this week.&lt;/p&gt;
+&lt;h1 id="the-goals"&gt;The goals&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Write a blog posts about my must-have tools setup as a reference for any future computer setups I have to do (inspired by &lt;a href="http://mattanjakern.de/2014/02/must-have-software-tools/"&gt;this post&lt;/a&gt; of a good colleague of mine). This will not be a complete list of everything, but I'll start with the essentials and extend it in the future.&lt;/li&gt;
+&lt;li&gt;I also want to try and create a little prototype for side project (can not talk about this too much as it is kind of secret, but at least I can mention it here).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;So, that's it for this week. Now I challenge myself to keep those goals and next monday we will see how I did ... have a nice week!&lt;/p&gt;
+</content>
+		<summary>&lt;p&gt;So the weekend was nice and I had time to think a little bit about this blog and my (practically) non-existent blogging habit. I want to change that, so here is what I am going to do:&lt;/p&gt;</summary>
+	</entry>
+	<entry>
+		<link href="http://daniel-rosendorf.de/blog/best-practices-when-using-entity-framework-code-first-migrations" />
+		<id>http://daniel-rosendorf.de/blog/best-practices-when-using-entity-framework-code-first-migrations</id>
+		<title>Best practices when using Entity Framework Code First Migrations</title>
+		<updated>2014-02-25T00:00:00Z</updated>
+		<content>&lt;p&gt;After seeing migrations in Ruby on Rails a few years ago I regularly searched for an equivalent in the .NET space. Then finally with EF Code First Migrations were introduced. Search done!&lt;/p&gt;
+&lt;p&gt;Now, after doing two projects using Code First Migrations, here are some basic rules that you should follow&lt;a id="fnref:1" href="#fn:1" class="footnote-ref"&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; if (and only if) you want to avoid trouble with migrations:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Use a local development database.&lt;/p&gt;
+&lt;p&gt;'nough said.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Use different seeds for different environments.&lt;/p&gt;
+&lt;p&gt;If your application requires users, your initial seed should in most cases contain an admin user to allow initial access to the application.
+For integration tests you should only have a bare minimum of data (just enough to get the application/integration tests running). Test-relevant data should be set up/created in your tests and cleaned before/after each test run.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Your seed method should be repeatable.&lt;/p&gt;
+&lt;p&gt;Take care that your seed method creates one time data really only once (e.g. login data for a specific user or the user itself should not be created again if it already exists). The AddOrUpdate method provides the key selector parameter for that purpose, but there may be cases where that is not enough.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Test your migrations.&lt;/p&gt;
+&lt;p&gt;The migrations generated by the&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;add-migration
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;command assume an empty database. However once you actually go live your database will not be empty. So test each migration (ideally on a copy of the live database).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Be aware of &amp;quot;merge&amp;quot; issues described in more detail in the MSDN article &lt;a href="http://msdn.microsoft.com/en-us/data/dn481501"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;A few ways to mitigate those are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Do not blindly commit your migrations. If you pull/update (depending on your SCM of choice) and you get a new migration that you do not have yet, recreate any migrations you created yourself and which are not yet committed/pushed to avoid merge issues. Take care that you roll back the migrations you are going to recreate to avoid troubles with your database.&lt;/li&gt;
+&lt;li&gt;You can also update your model and create your migration for your changes, then immediately commit/push your changes to avoid the point above. But be aware that this approach may lead to more migrations as you make additional model changes during the implementation of a feature.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;There are quite possibly more things to keep in mind, but those where the points that I remembered best. In my opinion you should follow all of those rules (with the possible exception of number 2) in any case, otherwise you and your teammates will spend some time to fix issues you will encounter when running
+update-database and/or deploying your application.&lt;/p&gt;
+&lt;div class="footnotes"&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id="fn:1"&gt;
+&lt;p&gt;In my not so humble opinion that is ;-)&lt;a href="#fnref:1" class="footnote-back-ref"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</content>
+		<summary>&lt;p&gt;After seeing migrations in Ruby on Rails a few years ago I regularly searched for an equivalent in the .NET space. Then finally with EF Code First Migrations were introduced. Search done!&lt;/p&gt;</summary>
+	</entry>
+	<entry>
+		<link href="http://daniel-rosendorf.de/blog/brainstorming-living-documentation" />
+		<id>http://daniel-rosendorf.de/blog/brainstorming-living-documentation</id>
+		<title>Brainstorming: Living documentation</title>
+		<updated>2013-08-02T00:00:00Z</updated>
+		<content>&lt;p&gt;&lt;em&gt;So it's been awhile since my last &lt;a href="/blog/categories/brainstorming/"&gt;brainstorming&lt;/a&gt; article (almost 2 years), but here is another one ;-)&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;{% img right &lt;a href="http://www.daniel-rosendorf.de/images/library.jpg"&gt;http://www.daniel-rosendorf.de/images/library.jpg&lt;/a&gt; %}&lt;/p&gt;
+&lt;h3 id="introduction"&gt;Introduction&lt;/h3&gt;
+&lt;p&gt;So, I'm reading again ... after what seems like years I decided to read something &amp;quot;technical&amp;quot; again and this time I want to tackle &lt;a href="http://specificationbyexample.com/"&gt;Specification By Example&lt;/a&gt; by &lt;a href="http://gojko.net/"&gt;Gojko Adzic&lt;/a&gt;. After not even finishing the fist chapter an idea that I had some months ago came back to me.&lt;/p&gt;
+&lt;h3 id="the-premise"&gt;The premise&lt;/h3&gt;
+&lt;p&gt;Imagine a typical software project with detailed specifications and a lot of automated acceptance tests (both of which do exist in every project, right? ;-). In &amp;quot;Specification By Example&amp;quot; Gojko talks about &lt;em&gt;living documentation&lt;/em&gt;, which means that specifications are &lt;em&gt;executable&lt;/em&gt; and are &lt;em&gt;validated frequently&lt;/em&gt; against the project.&lt;/p&gt;
+&lt;p&gt;Basically the specifications and the examples included are acceptance tests that get executed during the build and reflect the current development progress.&lt;/p&gt;
+&lt;h3 id="the-problem"&gt;The problem&lt;/h3&gt;
+&lt;p&gt;Unless you are using something like the &lt;a href=""&gt;Gherkin&lt;/a&gt; language to do your specifications, there will be no really easy way to translate specifications into tests and test cases that some system can automatically execute. So now what?&lt;/p&gt;
+&lt;h3 id="the-solution-as-invented-by-me"&gt;The solution (as invented by me ;-)&lt;/h3&gt;
+&lt;p&gt;You already have automatic tests in place and you already have the build fail if a test fails which in turn means you already have a test report. Everything that's missing is a system to capture the specifications and some way to map the captured specifications to one or more automatic tests.&lt;/p&gt;
+&lt;p&gt;So that's what we are going to build.&lt;/p&gt;
+&lt;h3 id="the-web-application"&gt;The web application&lt;/h3&gt;
+&lt;p&gt;The web application has a basic user management and allows for the following things:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Capture specifications (either directly in the web interface or through some kind of import, MS Excel would come to mind ... although I really do not know why :P)&lt;/li&gt;
+&lt;li&gt;Show current state of implementations (Not implemented, Ok, Failing)&lt;/li&gt;
+&lt;li&gt;Map specifications to tests in a test result report&lt;/li&gt;
+&lt;li&gt;Upload test result reports&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="the-setup"&gt;The setup&lt;/h3&gt;
+&lt;p&gt;For this to work the projects test results need to be uploaded to the web application. This can either be done manually (HINT: Don't!) or automatically by your CI server. For this the web application provides a simple API endpoint to post the documents to.&lt;/p&gt;
+&lt;h3 id="the-workflow"&gt;The workflow&lt;/h3&gt;
+&lt;p&gt;Let's assume we have a specification that we need to implement. We already have it in the system, so when a customer logs into the web interface the specification is shown as &amp;quot;Not implemented&amp;quot;. Now the developer has implemented some or all examples/test cases and the current test results got automatically uploaded to the application. So the developer logs in, selects the not yet implemented specification and is then able to map test results to this specification, so that after the mapping is done and the developer checks a checkbox during mapping that says &amp;quot;These are all test cases, there will not be any more&amp;quot; the specification and/or its examples will be shown as &amp;quot;Ok&amp;quot;. The mapping is stored so that when a mapped test fails, the project overview will be updated and show the status as &amp;quot;Failing&amp;quot;.&lt;/p&gt;
+&lt;p&gt;From here on, advanced workflows can be started, e.g. if a specification fails is it because requirements have changed or because of technical dependencies in the system (which probably should not be there).&lt;/p&gt;
+&lt;h3 id="great-what-now"&gt;Great, what now?&lt;/h3&gt;
+&lt;p&gt;I honestly don't know ... but I will make this some kind of conceptual series and blog about design details. So maybe at the end, we have a complete specification that we can implement ;-)&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;Image courtesy of &lt;a href="http://www.flickr.com/people/i8ipod/"&gt;Yuri Levchenko&lt;/a&gt;.&lt;/p&gt;
+</content>
+		<summary>&lt;p&gt;&lt;em&gt;So it's been awhile since my last &lt;a href="/blog/categories/brainstorming/"&gt;brainstorming&lt;/a&gt; article (almost 2 years), but here is another one ;-)&lt;/em&gt;&lt;/p&gt;</summary>
+	</entry>
+	<entry>
+		<link href="http://daniel-rosendorf.de/blog/types-of-tests-in-a-software-project" />
+		<id>http://daniel-rosendorf.de/blog/types-of-tests-in-a-software-project</id>
+		<title>Types of tests in a software project</title>
+		<updated>2013-07-10T00:00:00Z</updated>
+		<content>&lt;h3 id="disclaimer"&gt;Disclaimer&lt;/h3&gt;
+&lt;p&gt;The following descriptions and definitions are purely based on my own experience and knowledge. People will disagree. So be it ;-). I'm willing to talk about every definition in this post.&lt;/p&gt;
+&lt;h3 id="types-of-tests"&gt;Types of tests&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Unit test&lt;/strong&gt;&lt;br /&gt;
+Typically automated, this kind of tests exercises a single method in a system. In unit tests all external dependencies are mocked so that the tested code is completely isolated. Isolation in this case leads to a test that runs purely in memory as accessing a database of the filesystem would make this an integration test (see below).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Integration test&lt;/strong&gt;&lt;br /&gt;
+Normally automated as well this kind of test does test a set of components and their interactions and their integration into the whole (thus the name integration test).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Acceptance test&lt;/strong&gt;&lt;br /&gt;
+An acceptance test is another kind of integration test. Its goal is to verify that specific acceptance criterions (which are usually specified on a user story) are met when implementing a specific story.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;User interface tests&lt;/strong&gt;&lt;br /&gt;
+User interface tests drive the system through its user interface. Integration or acceptance tests may do this through special interfaces or on a layer just below the UI but a UI tests usually simulates a real user interaction like clicking a button or selecting an item in a dropdown.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="its-all-just-words"&gt;It's all just words&lt;/h3&gt;
+&lt;p&gt;Those are the types of tests that come to my mind at the moment. There are more and there are also other names for some of those tests above. Also the definition varies from developer to developer (and that's good ;-). Nevertheless at least inside of a team a common vocabulary should be used for specific test types.&lt;/p&gt;
+&lt;p&gt;I hope this definitions help a little.&lt;/p&gt;
+</content>
+		<summary>&lt;p&gt;The following descriptions and definitions are purely based on my own experience and knowledge. People will disagree. So be it ;-). I'm willing to talk about every definition in this post.&lt;/p&gt;</summary>
+	</entry>
+	<entry>
+		<link href="http://daniel-rosendorf.de/blog/4-simple-rules" />
+		<id>http://daniel-rosendorf.de/blog/4-simple-rules</id>
+		<title>4 simple rules</title>
+		<updated>2012-09-11T00:00:00Z</updated>
+		<content>&lt;h3 id="why"&gt;Why?&lt;/h3&gt;
+&lt;p&gt;I'm feeling quite depressed the last few days and I really do not know the cause of this. Vacation with my family was nice (although my wife was glad when I started working again ;-) and there are no other big factors in my life that pull me down that much. At least that's what I think ...
+So I decided to do a little experiment this week.&lt;/p&gt;
+&lt;h3 id="the-rules"&gt;The rules&lt;/h3&gt;
+&lt;p&gt;It's easy, just 4 simple rules to follow:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;em&gt;Go to bed (and sleep) at 10 pm.&lt;/em&gt;&lt;br /&gt;
+No staying up late.&lt;/li&gt;
+&lt;li&gt;
+&lt;pre&gt;&lt;code&gt;    *Get up at 5.30 am.*  
+&lt;/code&gt;&lt;/pre&gt;
+That's not too much of a problem as the kids are up this early as well :-)&lt;/li&gt;
+&lt;li&gt;
+&lt;pre&gt;&lt;code&gt;    *Do not drink more than 4 cups of coffee during the day.*  
+&lt;/code&gt;&lt;/pre&gt;
+This will be harder, because I'm quite addicted to coffee during my working hours.&lt;/li&gt;
+&lt;li&gt;
+&lt;pre&gt;&lt;code&gt;    *Take time to work on your private projects.*  
+&lt;/code&gt;&lt;/pre&gt;
+I have severall ideas of website and tools I want to build and it is time to start (and finish) at least one of those.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="what-are-the-expectations"&gt;What are the expectations?&lt;/h3&gt;
+&lt;p&gt;I hope that this will help me loosing those quite depressive (and also quite disturbing) feelings. I don't know if it will work, but it's at least worth a try. Wish me luck :-)&lt;/p&gt;
+</content>
+		<summary>&lt;p&gt;I'm feeling quite depressed the last few days and I really do not know the cause of this. Vacation with my family was nice (although my wife was glad when I started working again ;-) and there are no other big factors in my life that pull me down that much. At least that's what I think ...
+So I decided to do a little experiment this week.&lt;/p&gt;</summary>
+	</entry>
+	<entry>
+		<link href="http://daniel-rosendorf.de/blog/why-use-continuous-integration" />
+		<id>http://daniel-rosendorf.de/blog/why-use-continuous-integration</id>
+		<title>Why use Continuous Integration?</title>
+		<updated>2012-06-29T00:00:00Z</updated>
+		<content>&lt;h3 id="tldr"&gt;TL;DR;&lt;/h3&gt;
+&lt;p&gt;&lt;a href="http://en.wikipedia.org/wiki/Continuous_integration"&gt;Continuous Integration&lt;/a&gt; means that all changes are continuously integrated into a common integration branch. This allows for faster &amp;quot;compatibility&amp;quot; checks between various development branches, faster failure in case of test errors resulting from those changes and therefore less time developers have to spend hunting for issues that keep them from developing.&lt;/p&gt;
+&lt;h3 id="continuous-integration-and-development-workflow"&gt;Continuous integration and development workflow&lt;/h3&gt;
+&lt;p&gt;From a developer point-of-view, continuous integration means that you should integrate the changes in your local development branch into a central integration branch as soon as possible. Note the wording &amp;quot;integration branch&amp;quot;. Changes committed to this integration branch may not necessarily be released as there may be still work to be done before the corresponding feature/bugfix is done. This leads to the following branches in your SCM:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;master (from which the releases are built)&lt;/li&gt;
+&lt;li&gt;
+&lt;pre&gt;&lt;code&gt;development/integration (as the name says ;-)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;pre&gt;&lt;code&gt;a number of feature branches
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;and the following development workflow:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;pre&gt;&lt;code&gt;     The developer works on a feature branch.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;pre&gt;&lt;code&gt;     As soon as he wants to commit his changes to the integration branch (which should happen at least once a day, possibly 	more often), he merges his changes from this feature branch into the integration branch.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;pre&gt;&lt;code&gt;     After that he checks that his changes do not break anything on his local machine (project still compiles, tests still pass) and then
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;pre&gt;&lt;code&gt;     pushes his changes to the central repository.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;From there, an automated build server gets the lastest version and does a clean build. This ensures that the developer merged everything needed to build the project (sometimes a source file does not get committed etc.), which in turn ensures that each developer can continue working as expected then he gets the lastest sources.&lt;/p&gt;
+&lt;h3 id="ensuring-the-integrity-of-the-build"&gt;Ensuring the integrity of the build&lt;/h3&gt;
+&lt;p&gt;The workflow above should ensure that the automated build always passes. When this is not the case, fixing the build is the highest priority for the development team, as a broken build means that either&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;pre&gt;&lt;code&gt;A feature is broken (marked by a failing test ... hopefully)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;pre&gt;&lt;code&gt;A test is broken (either because of changed requirements or brittle tests)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;pre&gt;&lt;code&gt;The project does not compile (which hinders other developers from getting the latest source and integrating their changes)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="tools"&gt;Tools&lt;/h3&gt;
+&lt;p&gt;Continuous integration can be done totally by hand. You do not need a build server to check the build, you can do the clean build yourself. Nevertheless there are several tools (or classes of tools) that help you during the workflow:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;pre&gt;&lt;code&gt;A build server like [TeamCity](http://www.jetbrains.com/teamcity/), [Bamboo](http://www.atlassian.com/software/bamboo/overview) etc.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;pre&gt;&lt;code&gt;A DCVS like [Mercurial](http://mercurial.selenic.com/), [Git](http://git-scm.com/) or [Bazaar](http://bazaar.canonical.com/en/)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As I said, you can do Continuous Integration without those or with other tools, but especially a DCVS eases the integration process.&lt;/p&gt;
+&lt;h3 id="complementary-practices"&gt;Complementary practices&lt;/h3&gt;
+&lt;p&gt;Practices like TDD (and its various cousins) and automatic testing in general in combination with a build server allow you to verify the integrity of your project regularly. You can of course leave those out of the chain, but if you do automatic builds you should absolutely integrate automated tests as well (and everyone knows you should do TDD in any case, right ;-).&lt;/p&gt;
+</content>
+		<summary>&lt;p&gt;&lt;a href="http://en.wikipedia.org/wiki/Continuous_integration"&gt;Continuous Integration&lt;/a&gt; means that all changes are continuously integrated into a common integration branch. This allows for faster "compatibility" checks between various development branches, faster failure in case of test errors resulting from those changes and therefore less time developers have to spend hunting for issues that keep them from developing.&lt;/p&gt;</summary>
+	</entry>
+	<entry>
+		<link href="http://daniel-rosendorf.de/blog/blogging-is-hard" />
+		<id>http://daniel-rosendorf.de/blog/blogging-is-hard</id>
+		<title>Blogging is hard</title>
+		<updated>2012-06-01T00:00:00Z</updated>
+		<content>&lt;p&gt;As the title says: Blogging is hard. At least for me. I'm used to consume stuff on the internet, getting myself to write about stuff that actually interests someone is not easy.
+But why? I guess it's the process of writing things down.&lt;/p&gt;
+&lt;h3 id="the-problem"&gt;The problem&lt;/h3&gt;
+&lt;p&gt;Most of the time when I'm developing something I think to myself: &amp;quot;Write a blog post about this!&amp;quot;. Then there are the things to do:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;em&gt;Get a neutral example for the thing you want to blog about.&lt;/em&gt;&lt;br /&gt;
+Most of the time the code you are working on is project specific although the real problem you want to blog about is not (otherwise, why blog about it in the first case?). So you have to come up with a generic example for your problem, which takes time.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Get the code in a form that your readers can work with it.&lt;/em&gt;&lt;br /&gt;
+Although there are people who advocate posting code as images (as to avoid problems with Copy&amp;amp;Paste code) I like to provide the code in my posts as &lt;a href="https://gist.github.com/"&gt;gists&lt;/a&gt;. This takes time and I have not yet developed a workflow that makes this fast and easy for me.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Actually write the blog post.&lt;/em&gt;&lt;br /&gt;
+Coming up with the content, wording etc. takes time. I blog primarily for myself yet if no one can pull anything from my posts, the post is essentially worthless (which in fact my be true for this very post).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="so-what-to-do-about-this"&gt;So, what to do about this?&lt;/h3&gt;
+&lt;p&gt;Blog more. Develop a workflow for blogging. Get used to it. In the end it benefits me. It makes me think about the problem at hand, forcing my to come up with a more generic way to present it, seeing it from a slightly different angle.&lt;/p&gt;
+&lt;p&gt;And even small blog posts like this one (without too much content ;-) benefit me by familiarising me with &lt;a href="http://daringfireball.net/projects/markdown/"&gt;Markdown&lt;/a&gt; syntax and just plain old writing.&lt;/p&gt;
+</content>
+		<summary>&lt;p&gt;As the title says: Blogging is hard. At least for me. I'm used to consume stuff on the internet, getting myself to write about stuff that actually interests someone is not easy.
+But why? I guess it's the process of writing things down.&lt;/p&gt;</summary>
+	</entry>
+	<entry>
+		<link href="http://daniel-rosendorf.de/blog/lowering-the-entry-barrier-for-new-developers" />
+		<id>http://daniel-rosendorf.de/blog/lowering-the-entry-barrier-for-new-developers</id>
+		<title>Lowering the entry barrier for new developers on an existing project</title>
+		<updated>2012-05-18T00:00:00Z</updated>
+		<content>&lt;h3 id="what-is-this-all-about"&gt;What is this all about?&lt;/h3&gt;
+&lt;p&gt;This post is a short compilation of suggested practices to ease the entry barrier for developers coming into an already running project. As I'm mainly using the .NET Framework and Visual Studio I will describe options that refer to this setup.&lt;/p&gt;
+&lt;p&gt;This is purely a thought experiment at the moment: None of the things mentioned here were actually implemented or used by me, although I guess there are projects out there (commercial and open source) that use things from this list and I will certainly take care that future projects that I'm involved in will include some of the things mentioned below.&lt;/p&gt;
+&lt;h3 id="things-you-should-havedo"&gt;Things you should have/do&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;em&gt;Have an easy way to set up a local development database.&lt;/em&gt; Use either a tool like &lt;a href="https://github.com/chucknorris/roundhouse" title="RoundhousE"&gt;RoundhousE&lt;/a&gt; or something like &lt;a href="http://blogs.msdn.com/b/adonet/archive/2012/02/09/ef-4-3-automatic-migrations-walkthrough.aspx" title="Entity Framework 4.3 Automatic migrations walkthrough"&gt;EF Migrations&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Have documentation that points to places (or people) of interest (e.g. source control, build server, extended documentation).&lt;/em&gt; Suggestions here would be a ReadMe document in the solution folder etc.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;If additional software has to be installed to open projects in Visual Studio, provide a simple script that installs them if necessary&lt;/em&gt;. Examples would be ASP.NET MVC projects etc.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Have all necessary libraries in a folder within the source control so that they are checked out with the project&lt;/em&gt; (or have a script/tool that installs them like the &lt;a href="http://docs.nuget.org/docs/workflows/using-nuget-without-committing-packages" title="Using NuGet without committing packages"&gt;restore option of NuGet&lt;/a&gt;)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The very simple goal for this is that a developer checks out a project and immediately has all the things necessary to start working on it without having to contact or disturb another dev.&lt;/p&gt;
+&lt;p&gt;Note that environment specific assumptions in scripts and tools may exist (e.g. the users machine has to be connected to a specific VPN to successfully execute the script etc.) but this means that they have to be taken care of first.
+Also take care to provide good error messages and advice if something in the scripts goes wrong.&lt;/p&gt;
+&lt;h3 id="why-go-through-all-the-trouble"&gt;Why go through all the trouble?&lt;/h3&gt;
+&lt;p&gt;There are several reasons to do all this:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;If you are a small software shop, chances are that you need to shift developers frequently. Making it easy for developers to actually develop is just naturally a good thing to do.&lt;/li&gt;
+&lt;li&gt;Some of the practices above have the additional benefit that they integrate and help with automated builds and &lt;a href="http://martinfowler.com/articles/continuousIntegration.html" title="Continuous Integration"&gt;Continuous Integration&lt;/a&gt; (and its more advanced form of &lt;a href="http://en.wikipedia.org/wiki/Continuous_Delivery" title="Continuous Delivery"&gt;Continuous Delivery&lt;/a&gt;)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="final-thoughts"&gt;Final thoughts&lt;/h2&gt;
+&lt;p&gt;Practices shown in this article are overlooked most of the time. But I do not think that they take too much time to setup ... at least if you include them from the very beginning in your project. However as mentioned above I do not have the real world practice I'd like to have in this topic which in turn means that I will be missing a lot of points. If anyone has something to add to this list, feel free to leave a comment. I'll try to update this post now and then to keep this list as current as possible.&lt;/p&gt;
+</content>
+		<summary>&lt;p&gt;This post is a short compilation of suggested practices to ease the entry barrier for developers coming into an already running project. As I'm mainly using the .NET Framework and Visual Studio I will describe options that refer to this setup.&lt;/p&gt;</summary>
+	</entry>
+	<entry>
+		<link href="http://daniel-rosendorf.de/blog/running-nancy-with-kayak-in-a-simple-console-application" />
+		<id>http://daniel-rosendorf.de/blog/running-nancy-with-kayak-in-a-simple-console-application</id>
+		<title>Running Nancy with Kayak in a simple console application</title>
+		<updated>2012-03-23T00:00:00Z</updated>
+		<content>&lt;p&gt;Here we go again ...&lt;/p&gt;
+&lt;p&gt;In the last few days a did some smaller experiments for a new project idea that is spooking around in my head. One of those was to try and get &lt;a href="http://nancyfx.org/"&gt;Nancy&lt;/a&gt; up and running with &lt;a href="http://kayakhttp.com/"&gt;Kayak&lt;/a&gt; in a simple console application.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://whereslou.com/2012/01/16/gate-0-2-1-implementation-of-owin-online-at-nuget"&gt;This&lt;/a&gt; post from &lt;a href="http://twitter.com/loudej"&gt;Louis DeJardin&lt;/a&gt; provided a good place to start. Most of the post ist still current but there are some changes you have to make to get this up and running. I have no &amp;quot;official&amp;quot; information but I had to change the provided code in the KayakStarter class from this (taken from Louis post):&lt;/p&gt;
+&lt;p&gt;{% gist 2173428 KayakStarter_old.cs %}&lt;/p&gt;
+&lt;p&gt;to this:&lt;/p&gt;
+&lt;p&gt;{% gist 2173428 KayakStarter.cs %}&lt;/p&gt;
+&lt;p&gt;Did you spot the difference? The only change is the third parameter of the call to the Gate.Hosts.Kayak.KayakGate.Start method. This makes the non-working example files from the NuGet package working again, but it also seems like the Startup class is not used anymore.&lt;/p&gt;
+&lt;p&gt;Maybe someone with more experience in Kayak/OWIN can shed some light on this?&lt;/p&gt;
+</content>
+		<summary>&lt;p&gt;Here we go again ...&lt;/p&gt;</summary>
+	</entry>
+</feed>

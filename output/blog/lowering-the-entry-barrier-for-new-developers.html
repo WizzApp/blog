@@ -1,0 +1,174 @@
+﻿
+<!DOCTYPE html>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html lang="en">
+
+	<head>
+		<title>Daniel&#x27;s Blog - Lowering the entry barrier for new developers on an existing project</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1" />		
+        <link href="/assets/css/highlight.css" rel="stylesheet">
+		<!--[if lte IE 8]><script src="/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="/assets/css/ie8.css" /><![endif]-->
+        <link href="/assets/css/override.css" rel="stylesheet" />
+
+		<meta name="description" content="Musings about software development, coding ... and other stuff" />
+		<link type="application/rss+xml" rel="alternate" title="Daniel&#x27;s Blog" href="/feed.rss" />
+				<link type="application/atom+xml" rel="alternate" title="Daniel&#x27;s Blog" href="/feed.atom" />
+		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+		<meta name="application-name" content="Daniel&#x27;s Blog" />
+		<meta name="msapplication-tooltip" content="Daniel&#x27;s Blog" />
+		<meta name="msapplication-starturl" content="/" />
+
+		<meta property="og:title" content="Daniel&#x27;s Blog - Lowering the entry barrier for new developers on an existing project" /> 
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="http://daniel-rosendorf.de/blog/lowering-the-entry-barrier-for-new-developers" />
+		<!-- TODO: More social graph meta tags -->
+
+        <script src="/assets/js/highlight.pack.js"></script>   
+		
+        
+
+		
+	</head>
+
+	<body>
+		<!-- Wrapper -->
+		<div id="wrapper">
+
+			<!-- Header -->
+			<header id="header">
+				<div class="inner">
+
+					<!-- Logo -->
+					<a href="/" class="logo">
+						<span class="title">Daniel&#x27;s Blog</span>
+					</a>
+
+					<!-- Nav -->
+					<nav>
+						<ul>
+							<li><a href="#menu">Menu</a></li>
+						</ul>
+					</nav>
+
+				</div>
+			</header>
+
+			<!-- Menu -->
+			<nav id="menu">
+				<h2>Menu</h2>
+				<ul>
+					        <li><a href="/blog">Archive</a></li>
+        <li><a href="/tags">Tags</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/assets/img/license">License</a></li>
+
+				</ul>
+			</nav>
+
+			<!-- Main -->
+			<div id="main">
+				<div class="inner">
+
+    
+<header>
+    <h1>Lowering the entry barrier for new developers on an existing project</h1>
+            <p><em>Published on 18 Mai 2012</em></p>
+            <ul class="actions small">
+                    <li><a role="button" href="/tags/continuous-delivery" class="button small">continuous delivery</a></li>
+                    <li><a role="button" href="/tags/continuous-integration" class="button small">continuous integration</a></li>
+                    <li><a role="button" href="/tags/nuget" class="button small">nuget</a></li>
+                    <li><a role="button" href="/tags/practices" class="button small">practices</a></li>
+                    <li><a role="button" href="/tags/project-management" class="button small">project management</a></li>
+                    <li><a role="button" href="/tags/roundhouse" class="button small">roundhouse</a></li>
+                    <li><a role="button" href="/tags/software-development" class="button small">software development</a></li>
+                    <li><a role="button" href="/tags/tools" class="button small">tools</a></li>
+        </ul>     
+</header>
+
+					
+					<div id="content">
+						
+
+<h3 id="what-is-this-all-about">What is this all about?</h3>
+<p>This post is a short compilation of suggested practices to ease the entry barrier for developers coming into an already running project. As I'm mainly using the .NET Framework and Visual Studio I will describe options that refer to this setup.</p>
+<p>This is purely a thought experiment at the moment: None of the things mentioned here were actually implemented or used by me, although I guess there are projects out there (commercial and open source) that use things from this list and I will certainly take care that future projects that I'm involved in will include some of the things mentioned below.</p>
+<h3 id="things-you-should-havedo">Things you should have/do</h3>
+<ol>
+<li><em>Have an easy way to set up a local development database.</em> Use either a tool like <a href="https://github.com/chucknorris/roundhouse" title="RoundhousE">RoundhousE</a> or something like <a href="http://blogs.msdn.com/b/adonet/archive/2012/02/09/ef-4-3-automatic-migrations-walkthrough.aspx" title="Entity Framework 4.3 Automatic migrations walkthrough">EF Migrations</a>.</li>
+<li><em>Have documentation that points to places (or people) of interest (e.g. source control, build server, extended documentation).</em> Suggestions here would be a ReadMe document in the solution folder etc.</li>
+<li><em>If additional software has to be installed to open projects in Visual Studio, provide a simple script that installs them if necessary</em>. Examples would be ASP.NET MVC projects etc.</li>
+<li><em>Have all necessary libraries in a folder within the source control so that they are checked out with the project</em> (or have a script/tool that installs them like the <a href="http://docs.nuget.org/docs/workflows/using-nuget-without-committing-packages" title="Using NuGet without committing packages">restore option of NuGet</a>)</li>
+</ol>
+<p>The very simple goal for this is that a developer checks out a project and immediately has all the things necessary to start working on it without having to contact or disturb another dev.</p>
+<p>Note that environment specific assumptions in scripts and tools may exist (e.g. the users machine has to be connected to a specific VPN to successfully execute the script etc.) but this means that they have to be taken care of first.
+Also take care to provide good error messages and advice if something in the scripts goes wrong.</p>
+<h3 id="why-go-through-all-the-trouble">Why go through all the trouble?</h3>
+<p>There are several reasons to do all this:</p>
+<ol>
+<li>If you are a small software shop, chances are that you need to shift developers frequently. Making it easy for developers to actually develop is just naturally a good thing to do.</li>
+<li>Some of the practices above have the additional benefit that they integrate and help with automated builds and <a href="http://martinfowler.com/articles/continuousIntegration.html" title="Continuous Integration">Continuous Integration</a> (and its more advanced form of <a href="http://en.wikipedia.org/wiki/Continuous_Delivery" title="Continuous Delivery">Continuous Delivery</a>)</li>
+</ol>
+<h2 id="final-thoughts">Final thoughts</h2>
+<p>Practices shown in this article are overlooked most of the time. But I do not think that they take too much time to setup ... at least if you include them from the very beginning in your project. However as mentioned above I do not have the real world practice I'd like to have in this topic which in turn means that I will be missing a lot of points. If anyone has something to add to this list, feel free to leave a comment. I'll try to update this post now and then to keep this list as current as possible.</p>
+
+
+<ul class="share-buttons">
+  <li><a href="https://twitter.com/intent/tweet?source=https%3A%2F%2Fwww.daniel-rosendorf.de%2F&text=:%20https%3A%2F%2Fwww.daniel-rosendorf.de%2F&via=drosendorf" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;"><img alt="Tweet" src="../assets/img/Twitter.svg" /></a></li>
+  <li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.daniel-rosendorf.de%2F&quote=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&quote=' + encodeURIComponent(document.URL)); return false;"><img alt="Share on Facebook" src="../assets/img/Facebook.svg" /></a></li>
+  <li><a href="mailto:?subject=&body=:%20https%3A%2F%2Fwww.daniel-rosendorf.de%2F" target="_blank" title="Send email" onclick="window.open('mailto:?subject=' + encodeURIComponent(document.title) + '&body=' +  encodeURIComponent(document.URL)); return false;"><img alt="Send email" src="../assets/img/Email.svg" /></a></li>
+</ul>
+<script src="https://utteranc.es/client.js"
+        repo="WizzApp/blog"
+        issue-term="pathname"
+        async>
+</script>
+					</div>
+				</div>
+			</div>
+
+			<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+    <section>
+        <h2>Feeds</h2>
+        <ul class="actions small vertical">
+            <li><a href="/feed.rss" class="button small"><i class="fa fa-rss"></i> RSS Feed</a></li>
+                        <li><a href="/feed.atom" class="button small"><i class="fa fa-rss"></i> Atom Feed</a></li>
+        </ul>
+    </section>
+    <section>
+    </section>
+    <ul class="copyright">
+        <li>Copyright © 2018</li>
+        <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+        <li><a href="https://wyam.io">Generated by Wyam</a></li>
+    </ul>
+</div>
+
+			</footer>
+
+		</div>
+		
+		
+
+		<!-- Scripts -->
+		<script>hljs.initHighlightingOnLoad();</script>
+		<script src="/assets/js/jquery.min.js"></script>
+		<script src="/assets/js/skel.min.js"></script>
+		<script src="/assets/js/util.js"></script>
+		<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
+		<script src="/assets/js/main.js"></script>
+
+	</body>
+
+</html>

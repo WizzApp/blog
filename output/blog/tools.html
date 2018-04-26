@@ -1,0 +1,196 @@
+﻿
+<!DOCTYPE html>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html lang="en">
+
+	<head>
+		<title>Daniel&#x27;s Blog - Tools</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1" />		
+        <link href="/assets/css/highlight.css" rel="stylesheet">
+		<!--[if lte IE 8]><script src="/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="/assets/css/ie8.css" /><![endif]-->
+        <link href="/assets/css/override.css" rel="stylesheet" />
+
+		<meta name="description" content="Musings about software development, coding ... and other stuff" />
+		<link type="application/rss+xml" rel="alternate" title="Daniel&#x27;s Blog" href="/feed.rss" />
+				<link type="application/atom+xml" rel="alternate" title="Daniel&#x27;s Blog" href="/feed.atom" />
+		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+		<meta name="application-name" content="Daniel&#x27;s Blog" />
+		<meta name="msapplication-tooltip" content="Daniel&#x27;s Blog" />
+		<meta name="msapplication-starturl" content="/" />
+
+		<meta property="og:title" content="Daniel&#x27;s Blog - Tools" /> 
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="http://daniel-rosendorf.de/blog/tools" />
+		<!-- TODO: More social graph meta tags -->
+
+        <script src="/assets/js/highlight.pack.js"></script>   
+		
+        
+
+		
+	</head>
+
+	<body>
+		<!-- Wrapper -->
+		<div id="wrapper">
+
+			<!-- Header -->
+			<header id="header">
+				<div class="inner">
+
+					<!-- Logo -->
+					<a href="/" class="logo">
+						<span class="title">Daniel&#x27;s Blog</span>
+					</a>
+
+					<!-- Nav -->
+					<nav>
+						<ul>
+							<li><a href="#menu">Menu</a></li>
+						</ul>
+					</nav>
+
+				</div>
+			</header>
+
+			<!-- Menu -->
+			<nav id="menu">
+				<h2>Menu</h2>
+				<ul>
+					        <li><a href="/blog">Archive</a></li>
+        <li><a href="/tags">Tags</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/assets/img/license">License</a></li>
+
+				</ul>
+			</nav>
+
+			<!-- Main -->
+			<div id="main">
+				<div class="inner">
+
+    
+<header>
+    <h1>Tools</h1>
+            <p><em>Published on 13 M&#xE4;rz 2014</em></p>
+            <ul class="actions small">
+                    <li><a role="button" href="/tags/setup" class="button small">setup</a></li>
+                    <li><a role="button" href="/tags/software-development" class="button small">software development</a></li>
+                    <li><a role="button" href="/tags/tools" class="button small">tools</a></li>
+        </ul>     
+</header>
+
+					
+					<div id="content">
+						
+
+<p>As I said <a href="/blog/2014/03/03/week-10-2014">last week</a> I am going to talk a little bit about the tools I currently use/have installed on my dev machine. &quot;Tools&quot; in this case meaning almost everything, from languages/compilers to actual utilities and powershell scripts.</p>
+<p>And to be honest, this is more for my own benefit as I need to keep track of all that so that I can rebuild it if necessary.</p>
+<p>This will be just a list with links to the corresponding blog posts (or whatever) that helped me set the software up, so do not expect too much.</p>
+<p>Here we go ...</p>
+<h1 id="command-line">Command line</h1>
+<p>I am a fan of the command line interface. Not a wizard, but a fan. So here is a short overview over my setup:</p>
+<ol>
+<li><p><a href="http://bliker.github.io/cmder/">Cmder</a> as a host for my standard Powershell console.</p>
+</li>
+<li><p><a href="http://msysgit.github.io/*">msysgit</a>. The only true SCM ;-) in its official windows version.</p>
+</li>
+<li><p>Powershell (of course) with some custom scripts and extensions in my profile:</p>
+<ul>
+<li><p><a href="http://bradwilson.typepad.com/blog/2008/12/find-to-set-aliasps1.html">find-to-set-alias</a> to set various aliases for Visual Studio and Sublime Text.</p>
+</li>
+<li><p><a href="http://psget.net/">PsGet</a></p>
+</li>
+<li><p><a href="http://pscx.codeplex.com/">PowerShell Community Extensions</a></p>
+</li>
+<li><p><a href="http://dahlbyk.github.io/posh-git/">posh-git</a></p>
+</li>
+<li><p>I also have a line with a call to vcvarsall.bat in my PS profile:</p>
+<pre><code>Invoke-BatchFile &quot;C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat&quot; x86
+</code></pre>
+<p>This makes msbuild et al available so I can build most VS solutions from the shell as well.</p>
+</li>
+<li><p>Also ssh-agent is started when I start a Powershell session as described in <a href="http://haacked.com/archive/2011/12/19/get-git-for-windows.aspx/">this post</a> by Phil Haack.</p>
+</li>
+</ul>
+</li>
+<li><p><a href="https://chocolatey.org/">Chocolatey</a>. More or less the apt-get of the windows world ;-)</p>
+</li>
+<li><p><a href="http://scriptcs.net/">scriptcs</a>. Write C# like it is a scripting language. Nice to play around with.</p>
+</li>
+</ol>
+<h1 id="languages">Languages</h1>
+<ol>
+<li>.NET Framework (and various corresponding SDKs, of course).</li>
+<li><a href="http://nodejs.org/">nodejs</a>. For all the JS development that I never come around to.</li>
+<li><a href="https://www.ruby-lang.org">Ruby</a>. You are not hip anymore without Ruby. Install with the <a href="http://rubyinstaller.org/">RubyInstaller for Windows</a>.</li>
+<li><a href="http://www.python.org/">Python</a>. Nothing to say here.</li>
+</ol>
+<h1 id="ides">IDEs</h1>
+<ol>
+<li>Visual Studio</li>
+<li><a href="http://www.sublimetext.com/3">Sublime Text 3</a>. I use that one for everything I do not use VS for ;-)</li>
+</ol>
+<p>That is all for now, but I am almost positively sure that I missed something, so I will very probably update this post in the future.</p>
+
+
+<ul class="share-buttons">
+  <li><a href="https://twitter.com/intent/tweet?source=https%3A%2F%2Fwww.daniel-rosendorf.de%2F&text=:%20https%3A%2F%2Fwww.daniel-rosendorf.de%2F&via=drosendorf" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;"><img alt="Tweet" src="../assets/img/Twitter.svg" /></a></li>
+  <li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.daniel-rosendorf.de%2F&quote=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&quote=' + encodeURIComponent(document.URL)); return false;"><img alt="Share on Facebook" src="../assets/img/Facebook.svg" /></a></li>
+  <li><a href="mailto:?subject=&body=:%20https%3A%2F%2Fwww.daniel-rosendorf.de%2F" target="_blank" title="Send email" onclick="window.open('mailto:?subject=' + encodeURIComponent(document.title) + '&body=' +  encodeURIComponent(document.URL)); return false;"><img alt="Send email" src="../assets/img/Email.svg" /></a></li>
+</ul>
+<script src="https://utteranc.es/client.js"
+        repo="WizzApp/blog"
+        issue-term="pathname"
+        async>
+</script>
+					</div>
+				</div>
+			</div>
+
+			<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+    <section>
+        <h2>Feeds</h2>
+        <ul class="actions small vertical">
+            <li><a href="/feed.rss" class="button small"><i class="fa fa-rss"></i> RSS Feed</a></li>
+                        <li><a href="/feed.atom" class="button small"><i class="fa fa-rss"></i> Atom Feed</a></li>
+        </ul>
+    </section>
+    <section>
+    </section>
+    <ul class="copyright">
+        <li>Copyright © 2018</li>
+        <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+        <li><a href="https://wyam.io">Generated by Wyam</a></li>
+    </ul>
+</div>
+
+			</footer>
+
+		</div>
+		
+		
+
+		<!-- Scripts -->
+		<script>hljs.initHighlightingOnLoad();</script>
+		<script src="/assets/js/jquery.min.js"></script>
+		<script src="/assets/js/skel.min.js"></script>
+		<script src="/assets/js/util.js"></script>
+		<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
+		<script src="/assets/js/main.js"></script>
+
+	</body>
+
+</html>

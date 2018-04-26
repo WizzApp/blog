@@ -1,0 +1,176 @@
+﻿
+<!DOCTYPE html>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html lang="en">
+
+	<head>
+		<title>Daniel&#x27;s Blog - Updates to the Site</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1" />		
+        <link href="/assets/css/highlight.css" rel="stylesheet">
+		<!--[if lte IE 8]><script src="/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="/assets/css/ie8.css" /><![endif]-->
+        <link href="/assets/css/override.css" rel="stylesheet" />
+
+		<meta name="description" content="Musings about software development, coding ... and other stuff" />
+		<link type="application/rss+xml" rel="alternate" title="Daniel&#x27;s Blog" href="/feed.rss" />
+				<link type="application/atom+xml" rel="alternate" title="Daniel&#x27;s Blog" href="/feed.atom" />
+		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+		<meta name="application-name" content="Daniel&#x27;s Blog" />
+		<meta name="msapplication-tooltip" content="Daniel&#x27;s Blog" />
+		<meta name="msapplication-starturl" content="/" />
+
+		<meta property="og:title" content="Daniel&#x27;s Blog - Updates to the Site" /> 
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="http://daniel-rosendorf.de/blog/updates-to-the-site" />
+		<!-- TODO: More social graph meta tags -->
+
+        <script src="/assets/js/highlight.pack.js"></script>   
+		
+        
+
+		
+	</head>
+
+	<body>
+		<!-- Wrapper -->
+		<div id="wrapper">
+
+			<!-- Header -->
+			<header id="header">
+				<div class="inner">
+
+					<!-- Logo -->
+					<a href="/" class="logo">
+						<span class="title">Daniel&#x27;s Blog</span>
+					</a>
+
+					<!-- Nav -->
+					<nav>
+						<ul>
+							<li><a href="#menu">Menu</a></li>
+						</ul>
+					</nav>
+
+				</div>
+			</header>
+
+			<!-- Menu -->
+			<nav id="menu">
+				<h2>Menu</h2>
+				<ul>
+					        <li><a href="/blog">Archive</a></li>
+        <li><a href="/tags">Tags</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/assets/img/license">License</a></li>
+
+				</ul>
+			</nav>
+
+			<!-- Main -->
+			<div id="main">
+				<div class="inner">
+
+    
+<header>
+    <h1>Updates to the Site</h1>
+            <p><em>Published on 02 Februar 2016</em></p>
+            <ul class="actions small">
+                    <li><a role="button" href="/tags/blogging" class="button small">blogging</a></li>
+        </ul>     
+</header>
+
+					
+					<div id="content">
+						
+
+<p>Since changing the layout of the blog I also did some optimizations to enhance it a little bit. Most of those enhancements were proposed by Google PageSpeed, another one I took from the theme setup pages of the used theme, others are more or less mandated by law ;-).</p>
+<p>So what did I do?</p>
+<ul>
+<li>I optimized the used feature image and my &quot;avatar&quot; using <a href="http://jpegclub.org/">jpegtran</a> which decreased the initial file size by about 10 percent for each image.</li>
+<li>I changed my Nginx config to send out <em>Cache-Control</em> and <em>Expires</em> headers for all static assets set to 1 year from request. Here is the config snippet I added to the corresponding server directive:</li>
+</ul>
+<p>{% highlight Nginx %}
+location ~* .(js|css|png|jpg|jpeg|gif|ico)$ {
+expires 1y;
+}
+{% endhighlight %}</p>
+<ul>
+<li>I added the async attribute to some of the locally hosted scripts to hopefully shave of a little time by asynchronously executing scripts.</li>
+<li>I also added a basic cookie consent notification using <a href="https://silktide.com/tools/cookie-consent/">Cookie Consent</a> and a little cookie policy site (located <a href="/cookiepolicy/">here</a>). The text is more or less shamelessly stolen from <a href="https://silktide.com/privacy-policy/">Silktides own privacy policy site</a>.</li>
+<li>Next I added support for responsive images using the <a href="https://github.com/robwierzbowski/jekyll-picture-tag">Jekyll Picture Tag</a> plugin suggested in the original <a href="https://mmistakes.github.io/minimal-mistakes/theme-setup/">theme setup pages</a> of the <a href="https://mmistakes.github.io/minimal-mistakes/">Minimal Mistakes</a> theme.</li>
+<li>And last but not least I added <a href="https://github.com/penibelst/jekyll-compress-html">Jekyll HTML compression</a> to compress the generated HTML just a little bit. This reduces the index page by about 1570 bytes (which is by about 16 percent) using the following settings:
+{% highlight Yaml %}
+compress_html:
+clippings: all
+comments: [&quot;<!-- ", " -->&quot;]
+endings: all
+ignore:
+envs: []
+blanklines: false
+profile: false
+startings: [html, head, body]
+{% endhighlight %}
+It's not much, but it's not bad either and it depends on what markup to original markdown document contains, so numbers will differ.</li>
+</ul>
+<p>All in all those are all just micro optimizations but I learned some new stuff and I won't have to do it in the future.</p>
+
+
+<ul class="share-buttons">
+  <li><a href="https://twitter.com/intent/tweet?source=https%3A%2F%2Fwww.daniel-rosendorf.de%2F&text=:%20https%3A%2F%2Fwww.daniel-rosendorf.de%2F&via=drosendorf" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;"><img alt="Tweet" src="../assets/img/Twitter.svg" /></a></li>
+  <li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.daniel-rosendorf.de%2F&quote=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&quote=' + encodeURIComponent(document.URL)); return false;"><img alt="Share on Facebook" src="../assets/img/Facebook.svg" /></a></li>
+  <li><a href="mailto:?subject=&body=:%20https%3A%2F%2Fwww.daniel-rosendorf.de%2F" target="_blank" title="Send email" onclick="window.open('mailto:?subject=' + encodeURIComponent(document.title) + '&body=' +  encodeURIComponent(document.URL)); return false;"><img alt="Send email" src="../assets/img/Email.svg" /></a></li>
+</ul>
+<script src="https://utteranc.es/client.js"
+        repo="WizzApp/blog"
+        issue-term="pathname"
+        async>
+</script>
+					</div>
+				</div>
+			</div>
+
+			<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+    <section>
+        <h2>Feeds</h2>
+        <ul class="actions small vertical">
+            <li><a href="/feed.rss" class="button small"><i class="fa fa-rss"></i> RSS Feed</a></li>
+                        <li><a href="/feed.atom" class="button small"><i class="fa fa-rss"></i> Atom Feed</a></li>
+        </ul>
+    </section>
+    <section>
+    </section>
+    <ul class="copyright">
+        <li>Copyright © 2018</li>
+        <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+        <li><a href="https://wyam.io">Generated by Wyam</a></li>
+    </ul>
+</div>
+
+			</footer>
+
+		</div>
+		
+		
+
+		<!-- Scripts -->
+		<script>hljs.initHighlightingOnLoad();</script>
+		<script src="/assets/js/jquery.min.js"></script>
+		<script src="/assets/js/skel.min.js"></script>
+		<script src="/assets/js/util.js"></script>
+		<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
+		<script src="/assets/js/main.js"></script>
+
+	</body>
+
+</html>
