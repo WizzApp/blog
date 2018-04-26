@@ -4,7 +4,7 @@
 // Customize your settings and add new ones here
 Settings[Keys.Host] = "daniel-rosendorf.de";
 Settings[BlogKeys.Title] = "Daniel's Blog";
-Settings[BlogKeys.Description] = "Welcome to Daniel's blog!";
+Settings[BlogKeys.Description] = "Musings about software development, coding ... and other stuff";
 Settings[BlogKeys.PostsPath] = "blog";
 Settings[BlogKeys.NetlifyRedirects] = true;
 Settings[BlogKeys.MetaRefreshRedirects] = false;
