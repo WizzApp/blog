@@ -1,10 +1,7 @@
 ---
-layout: post
 title: Updates to the Site
-modified:
 excerpt: Since changing the layout of the blog I also did some optimizations to enhance it a little bit. Most of those enhancements were proposed by Google PageSpeed, another one I took from the theme setup pages of the used theme, others are more or less mandated by law ;-).
 tags: [blogging]
-published: 2016-02-02T14:09:32+01:00
 RedirectFrom: blog/2016/02/02/updates-to-the-site/index.html
 ---
 
