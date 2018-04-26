@@ -1,7 +1,7 @@
 ---
 title: "Types of tests in a software project"
 tags: [software development, practices, automated tests, automated testing, integration tests, unit tests, acceptance tests, definition]
-RedirectFrom: blog/2013/07/10/types-of-tests-in-a-software-project/index.html
+RedirectFrom: blog/2013/07/10/types-of-tests-in-a-software-project/*
 ---
 
 ### Disclaimer

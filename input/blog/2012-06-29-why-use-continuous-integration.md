@@ -1,7 +1,7 @@
 ---
 title: "Why use Continuous Integration?"
 tags: [software development, tools, practices, continuous integration, development workflow, automatic build]
-RedirectFrom: blog/2012/06/29/why-use-continuous-integration/index.html
+RedirectFrom: blog/2012/06/29/why-use-continuous-integration/*
 ---
 
 ### TL;DR;
@@ -18,10 +18,10 @@ From a developer point-of-view, continuous integration means that you should int
 
 and the following development workflow:
 
-1.        The developer works on a feature branch.
-2.        As soon as he wants to commit his changes to the integration branch (which should happen at least once a day, possibly 	more often), he merges his changes from this feature branch into the integration branch.
-3.        After that he checks that his changes do not break anything on his local machine (project still compiles, tests still pass) and then
-4.        pushes his changes to the central repository.
+1.         The developer works on a feature branch.
+2.         As soon as he wants to commit his changes to the integration branch (which should happen at least once a day, possibly 	more often), he merges his changes from this feature branch into the integration branch.
+3.         After that he checks that his changes do not break anything on his local machine (project still compiles, tests still pass) and then
+4.         pushes his changes to the central repository.
 
 From there, an automated build server gets the lastest version and does a clean build. This ensures that the developer merged everything needed to build the project (sometimes a source file does not get committed etc.), which in turn ensures that each developer can continue working as expected then he gets the lastest sources.
 

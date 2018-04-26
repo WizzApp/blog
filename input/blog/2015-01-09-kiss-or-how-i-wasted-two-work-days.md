@@ -1,7 +1,7 @@
 ---
 title: "Kiss or how I wasted two work days"
 tags: [software development]
-RedirectFrom: blog/2015/01/09/kiss-or-how-i-wasted-two-work-days/index.html
+RedirectFrom: blog/2015/01/09/kiss-or-how-i-wasted-two-work-days/*
 ---
 
 {% blockquote Wikipedia http://en.wikipedia.org/wiki/KISS_principle KISS principle %}

@@ -1,7 +1,7 @@
 ---
 title: "Hello World ... again"
 tags: blogging
-RedirectFrom: blog/2011/10/19/hello-world-dot-dot-dot-again/index.html
+RedirectFrom: blog/2011/10/19/hello-world-dot-dot-dot-again/*
 ---
 
 Hello world ... again. This time in english ;-).

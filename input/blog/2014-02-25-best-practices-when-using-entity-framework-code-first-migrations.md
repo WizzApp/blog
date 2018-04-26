@@ -1,7 +1,7 @@
 ---
 title: "Best practices when using Entity Framework Code First Migrations"
 tags: [entity framework, code first, migrations]
-RedirectFrom: blog/2014/02/25/best-practices-when-using-entity-framework-code-first-migrations/index.html
+RedirectFrom: blog/2014/02/25/best-practices-when-using-entity-framework-code-first-migrations/*
 ---
 
 After seeing migrations in Ruby on Rails a few years ago I regularly searched for an equivalent in the .NET space. Then finally with EF Code First Migrations were introduced. Search done!

@@ -1,7 +1,7 @@
 ---
 title: "Waterfall is dead ... or is it?"
 tags: [project management, software development, waterfall, agile]
-RedirectFrom: blog/2011/11/10/waterfall-is-dead-dot-dot-dot-or-is-it/index.html
+RedirectFrom: blog/2011/11/10/waterfall-is-dead-dot-dot-dot-or-is-it/*
 ---
 
 {% img right http://www.daniel-rosendorf.de/images/waterfall_medium.jpg %}

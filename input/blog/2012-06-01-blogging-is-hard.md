@@ -1,7 +1,7 @@
 ---
 title: "Blogging is hard"
 tags: blogging
-RedirectFrom: blog/2012/06/01/blogging-is-hard/index.html
+RedirectFrom: blog/2012/06/01/blogging-is-hard/*
 ---
 
 As the title says: Blogging is hard. At least for me. I'm used to consume stuff on the internet, getting myself to write about stuff that actually interests someone is not easy.

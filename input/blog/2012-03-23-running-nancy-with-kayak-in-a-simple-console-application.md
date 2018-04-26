@@ -1,7 +1,7 @@
 ---
 title: "Running Nancy with Kayak in a simple console application"
 tags: [Nancy, Kayak, software development, CSharp, .NET, console application, self host, OWIN]
-RedirectFrom: blog/2012/03/23/running-nancy-with-kayak-in-a-simple-console-application/index.html
+RedirectFrom: blog/2012/03/23/running-nancy-with-kayak-in-a-simple-console-application/*
 ---
 
 Here we go again ...

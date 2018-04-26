@@ -1,7 +1,7 @@
 ---
 title: "Brainstorming: Automatic updates for Winforms/WPF applications"
 tags: [brainstorming, software development, CSharp, .NET, windows forms, WPF, automatic updates]
-RedirectFrom: blog/2011/11/24/brainstorming-automatic-updates-for-winforms-slash-wpf-applications/index.html
+RedirectFrom: blog/2011/11/24/brainstorming-automatic-updates-for-winforms-slash-wpf-applications/*
 ---
 
 _This post is the first of a collection of [brainstorming](/blog/categories/brainstorming/) articles I'll write in the near future. These are primarily meant to note down my thoughts on specific projects and/or feature implementations etc._

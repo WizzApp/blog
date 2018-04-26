@@ -1,7 +1,7 @@
 ---
 title: "Learning something new"
 tags: [software development]
-RedirectFrom: blog/2015/03/04/learning-something-new/index.html
+RedirectFrom: blog/2015/03/04/learning-something-new/*
 ---
 
 ## TL;DR;
