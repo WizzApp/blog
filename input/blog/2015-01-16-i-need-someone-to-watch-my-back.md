@@ -1,7 +1,7 @@
 ---
 title: "I need someone to watch my back"
 tags: [software development]
-RedirectFrom: blog/2015/01/16/i-need-someone-to-watch-my-back/*
+RedirectFrom: blog/2015/01/29/i-need-someone-to-watch-my-back/*
 ---
 
 ### TL;DR;
